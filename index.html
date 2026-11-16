@@ -128,6 +128,24 @@ footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);backg
 .install-help{border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);padding:22px;max-width:min(440px,calc(100vw - 32px));font-size:15.5px}
 .install-help::backdrop{background:rgba(0,0,0,.5)}
 .install-help ol{padding-left:20px} .install-help li{margin:6px 0}
+.cb-fab{position:fixed;right:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:8px;background:var(--yellow);color:#3c1f5c;border:0;border-radius:99px;padding:10px 16px 10px 10px;font:800 15px var(--body);box-shadow:0 4px 0 var(--yellow-edge),0 8px 20px rgba(0,0,0,.25);cursor:pointer}
+.cb-fab img{width:30px;height:30px;border-radius:50%}
+.cb-panel{position:fixed;right:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:70;width:min(380px,calc(100vw - 28px));height:min(560px,calc(100svh - 28px));display:none;flex-direction:column;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.35);overflow:hidden}
+.cb-panel.on{display:flex}
+.cb-head{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bar);color:var(--bar-ink)}
+.cb-head img{width:34px;height:34px;border-radius:50%}
+.cb-head b{display:block;font:800 16px var(--disp)} .cb-head small{opacity:.85;font-size:12px}
+.cb-head button{margin-left:auto;background:transparent;border:1px solid rgba(255,244,213,.4);color:var(--bar-ink);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px}
+.cb-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.cb-m{max-width:88%;padding:8px 12px;border-radius:14px;font-size:15px;line-height:1.45}
+.cb-m.bot{background:var(--bg2);align-self:flex-start;border-bottom-left-radius:4px}
+.cb-m.me{background:var(--accent);color:var(--accent-ink);align-self:flex-end;border-bottom-right-radius:4px}
+.cb-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
+.cb-chips button{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:5px 12px;font:700 13px var(--body);cursor:pointer}
+.cb-form{display:flex;gap:8px;padding:10px 12px;border-top:2px solid var(--line)}
+.cb-form input{flex:1;min-width:0;padding:10px 14px;border-radius:99px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
+.cb-form button{border:0;border-radius:99px;background:var(--yellow);color:#3c1f5c;font-weight:800;padding:0 16px;cursor:pointer}
+@media (max-width:480px){.cb-panel{right:0;left:0;bottom:0;width:100%;height:78svh;border-radius:20px 20px 0 0}}
 @media (max-width:760px){
   .hero{grid-template-columns:minmax(0,1fr)} .hero figure{order:-1}
   .two,.pair{grid-template-columns:minmax(0,1fr)}
@@ -224,14 +242,14 @@ const YT = "https://www.youtube.com/@DimaagDada";
 const ytUrl = (id, short) => short ? "https://www.youtube.com/shorts/" + id : "https://www.youtube.com/watch?v=" + id;
 
 const BOOK = "https://www.techsamjhoraj.com/#puzzles";
-const WORLD = "https://www.techsamjhoraj.com/puzzles/";
+const WORLD = "world/";
 const TILES = [
   ["DD2","Logic puzzles","Clues, shapes and aha! moments","#daily"],
-  ["DD3","Maths adventures","Snakes, ladders and sums","https://www.techsamjhoraj.com/puzzles/snakes-sums.html"],
+  ["DD3","Maths adventures","Snakes, ladders and sums","world/snakes-sums.html"],
   ["DD4","Jigsaws","A free online jigsaw, 3 levels","https://www.techsamjhoraj.com/#jigsaw"],
-  ["DD5","Comics and stories","Dada's tales in pictures","https://www.techsamjhoraj.com/puzzles/comics.html"],
-  ["DD6","Ludo","A classic family game","https://www.techsamjhoraj.com/puzzles/ludo.html"],
-  ["DD7","Chess","Learn and play with Dada","https://www.techsamjhoraj.com/puzzles/chess.html"]
+  ["DD5","Comics and stories","Dada's tales in pictures","world/comics.html"],
+  ["DD6","Ludo","A classic family game","world/ludo.html"],
+  ["DD7","Chess","Learn and play with Dada","world/chess.html"]
 ];
 const tile = ([e, t, d, l]) => `<a class="tile" href="${l}"${l.startsWith("http") ? ' rel="noopener"' : ""}><img src="img/${e}.webp" alt="" width="72" height="72" loading="lazy"><b>${t}</b><small>${d}</small></a>`;
 
@@ -255,7 +273,7 @@ const VIEWS = {
       <ul class="stats"><li><b>1</b> new video every day</li><li><b>6</b> free games</li><li><b>192</b> puzzles in the book</li></ul></div>
     <figure><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu, all three in round black glasses" width="1005" height="698"><figcaption>“Wait! Think first, then speak.”</figcaption></figure></section>
     <section class="sec"><h2>Today's puzzle</h2>${puzzleCard(0)}<p><a href="#daily">More puzzles →</a></p></section>
-    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(tile).join("")}</div><p class="note">The games live in Dada World and open in a new page for now.</p></section>
+    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(tile).join("")}</div><p class="note">The games live in Dada World. The jigsaw is on our Tech site for now.</p></section>
     <section class="sec two"><div class="card"><p class="eyebrow">New every day</p><h3>Puzzle archive</h3><p>Every puzzle video, one tap away. Think first, then watch Dada's trick.</p><a class="btn" href="#archive">Open the archive</a></div>
       <div class="card"><p class="eyebrow">For exam practice</p><h3>Reasoning Samjho</h3><p>Our puzzle book: 192 puzzles that train you for school quizzes, interviews and competitive exams.</p><a class="btn" href="#books">About the book</a></div></section>
     <section class="sec"><h2>Never miss a puzzle</h2><p>Follow Dada where you like. WhatsApp and Telegram get the same channel updates.</p><ul class="soc">${socialHtml()}</ul><a class="btn ghost" href="#channels">All channels</a></section>${signup("Get a note when a new Dada book or game is ready")}`,
@@ -271,7 +289,7 @@ const VIEWS = {
 
   world: () => `<h1>Dada World</h1><p class="lead">Free games and comics from Dimaag Dada. They work offline once opened.</p>
     <div class="grid">${TILES.map(tile).join("")}</div>
-    <div class="card sec"><h3>Open the whole of Dada World</h3><p>Play, the Dada Club, Learn and the Dada Shop live in one app. We are moving it onto this site soon.</p><a class="btn" href="${WORLD}" rel="noopener">Open Dada World</a></div>`,
+    <div class="card sec"><h3>Open the whole of Dada World</h3><p>Play, the Dada Club, Learn and the Dada Shop live in one app, now right here on dimaagdada.com.</p><a class="btn" href="${WORLD}">Open Dada World</a></div>`,
 
   stories: () => `<h1>Dada's stories</h1><p class="lead">3D cartoon adventures with Dada and his grandchildren, Anna and Chiklu. Puzzles are hidden inside every story.</p>
     <ul class="list">${LONGS.map(l => `<li><a class="item" href="${ytUrl(l.id, 0)}" rel="noopener"><span class="d">${l.d}</span><span><b>${l.t}</b><small>${l.x}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
@@ -341,6 +359,54 @@ document.getElementById("theme").addEventListener("click", () => {
   try { localStorage.setItem("dd-theme", next); } catch (e) {}
 });
 render();
+
+const DADA = {
+  last: null,
+  hello: 'Namaste! I am <b>Ask Dada</b>, an automated helper on this site. I am not the real Dimaag Dada and I am not AI. I follow simple rules, like a puzzle. What would you like?',
+  chips: ["Today's puzzle", "Watch videos", "Play games", "The book", "Join channels", "Who are Anna and Chiklu?"],
+  fallback: 'Hmm, that one is too tricky for me. Try one of these, or write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.',
+  rules: [
+    [["hint","clue"], () => DADA.last ? { text: "<b>Hint:</b> " + DADA.last.h, chips: ["Show the answer"] } : { text: "Ask for a puzzle first!", chips: ["Today's puzzle"] }],
+    [["answer","solution","solve","reveal"], () => DADA.last ? { text: "<b>Answer: " + DADA.last.a + ".</b> " + DADA.last.w, chips: ["Another puzzle"] } : { text: "Ask for a puzzle first!", chips: ["Today's puzzle"] }],
+    [["another","next","more puzzle"], () => { DADA.last = PUZZLES[Math.floor(Math.random() * PUZZLES.length)]; return { text: "<b>Think first:</b> " + DADA.last.q, chips: ["Hint", "Show the answer"] }; }],
+    [["puzzle","puzzles","riddle","daily","today","brain","today's"], () => { DADA.last = pick(0); return { text: "<b>Today's puzzle:</b> " + DADA.last.q + '<br><a href="#daily">Open the daily puzzle page</a>', chips: ["Hint", "Show the answer", "Another puzzle"] }; }],
+    [["video","videos","watch","youtube","short","shorts","archive","story","stories","long"], () => ({ text: 'Every puzzle video is in the <a href="#archive">archive</a>, and the cartoon adventures are in <a href="#stories">Stories</a>. Or go straight to <a href="' + YT + '" rel="noopener">YouTube</a>.', chips: ["Join channels"] })],
+    [["game","games","play","ludo","chess","jigsaw","snakes","comic","comics","world"], () => ({ text: 'Dada World has a jigsaw, snakes and sums, ludo, chess and comics. <a href="#world">Open Dada World</a>.', chips: ["Today's puzzle"] })],
+    [["book","books","reasoning","buy","selection"], () => ({ text: 'The puzzle book is <b>Reasoning Samjho: Puzzle se Selection tak</b>, with 192 puzzles. See <a href="#books">Books</a>.', chips: ["Join channels"] })],
+    [["whatsapp","telegram","channel","channels","join","follow","instagram","facebook","insta"], () => ({ text: 'Follow Dada on <a href="' + YT + '" rel="noopener">YouTube</a>, Instagram and Facebook. WhatsApp and Telegram work as a pair: all links and QR codes are on the <a href="#channels">Join page</a>.' })],
+    [["install","app","download","phone"], () => ({ text: 'Tap the <b>Install app</b> button at the top of the page. It adds Dimaag Dada to your home screen and works offline.' })],
+    [["anna","chiklu","cast","who","dada","grandfather","glasses"], () => ({ text: 'Dimaag Dada is the wise grandfather. <b>Anna</b> (9) and <b>Chiklu</b> (7) are his grandchildren from the Netherlands. All three wear round black glasses! Read more on <a href="#about">About</a>.' })],
+    [["exam","exams","competitive","school","quiz","interview","selection"], () => ({ text: "Dada's puzzles train careful thinking for school quizzes, interviews and competitive exams. Start with <a href=\"#daily\">today's puzzle</a>.", chips: ["Today's puzzle"] })],
+    [["email","newsletter","notify","subscribe","signup","sign"], () => ({ text: 'There is no email sign-up yet. Follow the <a href="#channels">channels</a> to hear first.' })],
+    [["contact","write","mail","help"], () => ({ text: 'Write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.' })],
+    [["privacy","tracking","cookies","data"], () => ({ text: 'No account, no ads, no tracking. Details on the <a href="#privacy">Privacy page</a>.' })],
+    [["hello","hi","hey","namaste","hii"], () => ({ text: DADA.hello, chips: DADA.chips })],
+    [["bye","goodbye","thanks","thank"], () => ({ text: "Bye bye! Remember: wait, think first, then speak." })]
+  ]
+};
+function dadaReply(t){
+  const s = " " + t.toLowerCase().replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+  for (const [keys, fn] of DADA.rules) if (keys.some(k => s.includes(" " + k + " "))) return fn();
+  return { text: DADA.fallback, chips: DADA.chips };
+}
+(function askDada(){
+  const fab = document.createElement("button"); fab.className = "cb-fab"; fab.type = "button"; fab.setAttribute("aria-haspopup", "dialog");
+  fab.innerHTML = '<img src="img/icon-192.png" alt="" width="30" height="30">Ask Dada';
+  const p = document.createElement("div"); p.className = "cb-panel"; p.setAttribute("role", "dialog"); p.setAttribute("aria-label", "Ask Dada, an automated helper");
+  p.innerHTML = '<div class="cb-head"><img src="img/icon-192.png" alt="" width="34" height="34"><div><b>Ask Dada</b><small>Automated helper, not AI</small></div><button type="button" aria-label="Close">✕</button></div><div class="cb-log" aria-live="polite"></div><div class="cb-chips"></div><form class="cb-form"><input type="text" aria-label="Your message" placeholder="Type a question…" autocomplete="off"><button type="submit">Send</button></form>';
+  document.body.append(fab, p);
+  const log = p.querySelector(".cb-log"), chips = p.querySelector(".cb-chips"), inp = p.querySelector("input");
+  const add = (cls, html) => { const d = document.createElement("div"); d.className = "cb-m " + cls; if (cls === "me") d.textContent = html; else d.innerHTML = html; log.append(d); log.scrollTop = log.scrollHeight; };
+  const setChips = list => { chips.innerHTML = ""; (list || []).forEach(c => { const b = document.createElement("button"); b.type = "button"; b.textContent = c; b.addEventListener("click", () => send(c)); chips.append(b); }); };
+  const send = t => { t = t.trim(); if (!t) return; add("me", t); const r = dadaReply(t); setTimeout(() => { add("bot", r.text); setChips(r.chips); }, 250); };
+  const open = () => { p.classList.add("on"); fab.hidden = true; if (!log.children.length) { add("bot", DADA.hello); setChips(DADA.chips); } inp.focus({ preventScroll: true }); };
+  const close = () => { p.classList.remove("on"); fab.hidden = false; };
+  fab.addEventListener("click", open);
+  p.querySelector(".cb-head button").addEventListener("click", close);
+  p.querySelector("form").addEventListener("submit", e => { e.preventDefault(); send(inp.value); inp.value = ""; });
+  log.addEventListener("click", e => { if (e.target.closest("a[href^='#']") && matchMedia("(max-width:480px)").matches) close(); });
+  addEventListener("keydown", e => { if (e.key === "Escape" && p.classList.contains("on")) close(); });
+})();
 </script>
 <script>
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
