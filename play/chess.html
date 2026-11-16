@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add("embed");</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Botu Chess · Dada World</title>
+<title>Botu Chess · Dimaag Dada</title>
 <meta name="description" content="Botu Chess: play chess against Botu the robot (3 levels) or a friend on one phone. Works offline.">
 <meta name="theme-color" content="#0f181b">
 <link rel="manifest" href="manifest.webmanifest">
@@ -51,11 +53,12 @@ h1{font:800 22px/1 var(--disp);margin:0}
 .promo div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;gap:8px}
 .promo button{width:64px;height:64px;font-size:40px;border-radius:12px;border:0;background:var(--lt);color:#111}
 .rules{margin-top:14px;color:var(--muted);font-size:14px}.rules b{color:var(--ink)}
+.embed header.top,.embed nav.tabs,.embed .top{display:none!important}.embed body{background:transparent!important}.embed .wrap{max-width:none;padding-top:0}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a href="./">← Play</a><h1>Botu Chess</h1></div>
+  <div class="top"><a href="../#play" target="_top">← Play</a><h1>Botu Chess</h1></div>
   <div id="setup" class="card setup">
     <img class="hero" src="img/chess.webp" alt="Botu the robot at a chess board" onerror="this.style.visibility='hidden'">
     <p style="margin-top:0">Beep boop! Botu loves chess. Play against Botu, or with a friend on the same phone.</p>

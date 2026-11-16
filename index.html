@@ -137,6 +137,7 @@ footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);backg
 .jzcard{box-shadow:var(--shadow)}
 .bookhero{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:start}.bookhero img.cov{width:100%;height:auto;border-radius:10px;box-shadow:var(--shadow)}.ticks{padding-left:20px}.pricebox{position:relative;padding:16px;border-radius:16px;background:var(--bg2);border:2px dashed var(--accent)}.pricebox .price s{opacity:.6}.pricebox .both{font-size:14px;margin:4px 0 10px;color:var(--muted)}.pricebox .mascot{float:right;width:96px;height:auto;margin:0 0 8px 8px}.chip2{display:inline-block;background:var(--yellow);color:#3c1f5c;font-weight:800;font-size:12px;border-radius:99px;padding:2px 10px}.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}.pcard{border:2px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--card)}.pcard span{display:block;color:var(--muted)}@media (max-width:760px){.bookhero,.jzcard{grid-template-columns:minmax(0,1fr)}}
 .hf{position:relative}.hchips{position:absolute;inset:0;pointer-events:none}.hc{pointer-events:auto;position:absolute;background:var(--yellow);color:#3c1f5c;font:800 13px var(--body);padding:6px 12px;border-radius:99px;box-shadow:0 3px 0 var(--yellow-edge);text-decoration:none;animation:hbob 3.2s ease-in-out infinite}.hc i{display:none;position:absolute;left:50%;top:115%;transform:translateX(-50%);width:max-content;max-width:180px;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:6px 10px;font:600 12.5px var(--body);font-style:normal;z-index:5;box-shadow:var(--shadow)}.hc:hover i,.hc:focus-visible i{display:block}.hc1{left:2%;top:8%}.hc2{right:2%;top:6%;animation-delay:.5s}.hc3{left:0;bottom:30%;animation-delay:1s}.hc4{right:0;bottom:34%;animation-delay:1.5s}.hc5{right:8%;bottom:6%;animation-delay:2s}@keyframes hbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@media (prefers-reduced-motion:reduce){.hc{animation:none}}@media (max-width:760px){.hc{font-size:12px;padding:5px 10px}.hc i{display:none!important}}
+.gf{width:100%;border:0;min-height:520px;border-radius:16px;background:#0f181b;display:block}
 .cb-fab{position:fixed;right:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:8px;background:var(--yellow);color:#3c1f5c;border:0;border-radius:99px;padding:10px 16px 10px 10px;font:800 15px var(--body);box-shadow:0 4px 0 var(--yellow-edge),0 8px 20px rgba(0,0,0,.25);cursor:pointer}
 .cb-fab img{width:30px;height:30px;border-radius:50%}
 .cb-panel{position:fixed;right:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:70;width:min(380px,calc(100vw - 28px));height:min(560px,calc(100svh - 28px));display:none;flex-direction:column;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.35);overflow:hidden}
@@ -180,7 +181,7 @@ footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);backg
   <div class="wrap">
     <div class="cols">
       <div><h4>Dimaag Dada</h4><p style="margin:0;font-size:14px">A 3D cartoon grandfather with a puzzle for every day. Channel run by Raj (Samjho with Raj).</p><ul class="soc" id="foot-soc"></ul></div>
-      <div><h4>Explore</h4><ul><li><a href="#daily">Daily puzzle</a></li><li><a href="#archive">Puzzle archive</a></li><li><a href="#world">Dada World</a></li><li><a href="#stories">Stories</a></li><li><a href="#books">Books</a></li></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="#daily">Daily puzzle</a></li><li><a href="#archive">Puzzle archive</a></li><li><a href="#play">Play</a></li><li><a href="#shop">Shop</a></li><li><a href="#stories">Stories</a></li><li><a href="#books">Books</a></li></ul></div>
       <div><h4>Join Dada</h4><ul><li><a href="#channels">All channels</a></li><li><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">WhatsApp channel</a></li><li><a href="https://t.me/dimaagdada" rel="noopener">Telegram channel</a></li></ul></div>
       <div><h4>Samjho with Raj</h4><ul><li><a href="https://www.techsamjhoraj.com/" rel="noopener">Tech Samjho Raj</a></li><li><a href="https://www.paisasamjhoraj.com/" rel="noopener">Paisa Samjho Raj</a></li><li><a href="#about">About</a></li><li><a href="#privacy">Privacy</a></li></ul></div>
     </div>
@@ -250,14 +251,13 @@ const LONGS = [
 const YT = "https://www.youtube.com/@DimaagDada";
 const ytUrl = (id, short) => short ? "https://www.youtube.com/shorts/" + id : "https://www.youtube.com/watch?v=" + id;
 
-const WORLD = "world/";
 const TILES = [
   ["DD2","Logic puzzles","Clues, shapes and aha! moments","#daily"],
-  ["DD3","Maths adventures","Snakes, ladders and sums","world/snakes-sums.html"],
+  ["DD3","Maths adventures","Snakes, ladders and sums","#snakes"],
   ["DD4","Jigsaws","A free online jigsaw, 3 levels","#jigsaw"],
-  ["DD5","Comics and stories","Dada's tales in pictures","world/comics.html"],
-  ["DD6","Ludo","A classic family game","world/ludo.html"],
-  ["DD7","Chess","Learn and play with Dada","world/chess.html"]
+  ["DD5","Comics and stories","Dada's tales in pictures","#comics"],
+  ["DD6","Ludo","A classic family game","#ludo"],
+  ["DD7","Chess","Learn and play with Dada","#chess"]
 ];
 const tile = ([e, t, d, l]) => `<a class="tile" href="${l}"${l.startsWith("http") ? ' rel="noopener"' : ""}><img src="img/${e}.webp" alt="" width="72" height="72" loading="lazy"><b>${t}</b><small>${d}</small></a>`;
 
@@ -274,14 +274,21 @@ function puzzleCard(off){
     <div class="puz-box" id="ans-box"><b>Answer: ${p.a}.</b> ${p.w}</div></div>`;
 }
 
+const frame = (src, title, lead) => `<h1>${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ""}<iframe class="gf" id="gf" src="${src}" title="${title}"></iframe><p class="note"><a href="${src.replace("?embed=1", "")}">Open full screen</a> · <a href="#play">← Back to Play</a></p>`;
+function fitFrame(){
+  clearInterval(window.__gfT);
+  const f = document.getElementById("gf"); if (!f) return;
+  const fit = () => { try { const d = f.contentDocument; if (d && d.documentElement) f.style.height = Math.max(d.documentElement.scrollHeight, d.body ? d.body.scrollHeight : 0, 520) + "px"; } catch (e) {} };
+  f.addEventListener("load", fit); window.__gfT = setInterval(() => { if (!document.getElementById("gf")) clearInterval(window.__gfT); else fit(); }, 700);
+}
 const VIEWS = {
   home: () => `<section class="hero"><div><p class="eyebrow">Dimaag Dada</p><h1>A puzzle for <em>every curious mind.</em></h1>
       <p class="lead">Meet Dimaag Dada, Anna and Chiklu. Puzzles, stories and games that make you stop, think and say “aha!”. Free, for kids, teens and grown-ups.</p>
       <a class="btn" href="#daily">Try today's puzzle</a><a class="btn ghost" href="${YT}" rel="noopener">Watch on YouTube</a>
       <ul class="stats"><li><b>1</b> new video every day</li><li><b>6</b> free games</li><li><b>192</b> puzzles in the book</li></ul></div>
-    <figure class="hf"><div class="hchips" aria-label="Dada's adventures"><a class="hc hc1" href="#daily"><span>Logic puzzles</span><i>Clues, shapes and aha! moments</i></a><a class="hc hc2" href="world/snakes-sums.html"><span>Maths</span><i>Snakes, ladders and sums</i></a><a class="hc hc3" href="#jigsaw"><span>Jigsaws</span><i>A free online jigsaw</i></a><a class="hc hc4" href="world/comics.html"><span>Stories</span><i>Dada's tales in pictures</i></a><a class="hc hc5" href="world/chess.html"><span>Chess</span><i>Learn and play with Dada</i></a></div><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu, all three in round black glasses" width="1005" height="698"><figcaption>“Wait! Think first, then speak.”</figcaption></figure></section>
+    <figure class="hf"><div class="hchips" aria-label="Dada's adventures"><a class="hc hc1" href="#daily"><span>Logic puzzles</span><i>Clues, shapes and aha! moments</i></a><a class="hc hc2" href="#snakes"><span>Maths</span><i>Snakes, ladders and sums</i></a><a class="hc hc3" href="#jigsaw"><span>Jigsaws</span><i>A free online jigsaw</i></a><a class="hc hc4" href="#comics"><span>Stories</span><i>Dada's tales in pictures</i></a><a class="hc hc5" href="#chess"><span>Chess</span><i>Learn and play with Dada</i></a></div><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu, all three in round black glasses" width="1005" height="698"><figcaption>“Wait! Think first, then speak.”</figcaption></figure></section>
     <section class="sec"><h2>Today's puzzle</h2>${puzzleCard(0)}<p><a href="#daily">More puzzles →</a></p></section>
-    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(tile).join("")}</div><p class="note">The games live in Dada World.</p></section>
+    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(tile).join("")}</div><p class="note">The games are on the <a href="#play">Play</a> page.</p></section>
     <section class="sec two"><div class="card"><p class="eyebrow">New every day</p><h3>Puzzle archive</h3><p>Every puzzle video, one tap away. Think first, then watch Dada's trick.</p><a class="btn" href="#archive">Open the archive</a></div>
       <div class="card"><p class="eyebrow">For exam practice</p><h3>Reasoning Samjho</h3><p>Our puzzle book: 192 puzzles that train you for school quizzes, interviews and competitive exams.</p><a class="btn" href="#books">About the book</a></div></section>
     <section class="sec"><h2>Never miss a puzzle</h2><p>Follow Dada where you like. WhatsApp and Telegram get the same channel updates.</p><ul class="soc">${socialHtml()}</ul><a class="btn ghost" href="#channels">All channels</a></section>${signup("Get a note when a new Dada book or game is ready")}`,
@@ -295,12 +302,19 @@ const VIEWS = {
     <ul class="list" id="arch">${ARCHIVE.map(a => `<li data-k="${a.k}"><a class="item" href="${ytUrl(a.id, a.s)}" rel="noopener"><span class="d">${a.d}</span><span><b>${a.t}</b><small>${a.k === "puzzle" ? "Puzzle Short" : "Science Short"}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
     <p class="note">More videos are on the <a href="${YT}/shorts" rel="noopener">channel</a>. This list grows every day.</p>`,
 
-  world: () => `<h1>Dada World</h1><p class="lead">Free games and comics from Dimaag Dada. They work offline once opened.</p>
-    <div class="grid">${TILES.map(tile).join("")}</div>
-    <div class="card sec"><h3>Open the whole of Dada World</h3><p>Play, the Dada Club, Learn and the Dada Shop live in one app, now right here on dimaagdada.com.</p><a class="btn" href="${WORLD}">Open Dada World</a></div>`,
+  play: () => `<h1>Play</h1><p class="lead">Free games from Dimaag Dada. They work on phones and laptops, and offline once opened.</p>
+    <div class="grid">${[["DD2","Daily puzzle","Think first, then peek","#daily"],["DD4","Jigsaw: Mystery House","12, 24 or 48 pieces","#jigsaw"],["DD4","More jigsaw scenes","School trip, train journey, space lab and more","#scenes"],["DD3","Snakes &amp; Sums","Snakes, ladders and sums","#snakes"],["DD6","Dada Ludo","2 to 4 players","#ludo"],["DD7","Botu Chess","Learn and play with Botu","#chess"],["DD5","Dada Comics","The Puzzle Trail, read free","#comics"]].map(tile).join("")}</div>`,
+
+  scenes: () => frame("play/?embed=1#/", "Jigsaw scenes", "Pick a scene and put it together. A new free puzzle every day."),
+  snakes: () => frame("play/snakes-sums.html?embed=1", "Snakes & Sums"),
+  ludo: () => frame("play/ludo.html?embed=1", "Dada Ludo"),
+  chess: () => frame("play/chess.html?embed=1", "Botu Chess"),
+  comics: () => frame("play/comics.html?embed=1", "Dada Comics"),
+  shop: () => frame("play/?embed=1#/shop", "Shop and Club", "Puzzle books, comics, stationery and the Dada Club."),
 
   stories: () => `<h1>Dada's stories</h1><p class="lead">3D cartoon adventures with Dada and his grandchildren, Anna and Chiklu. Puzzles are hidden inside every story.</p>
     <ul class="list">${LONGS.map(l => `<li><a class="item" href="${ytUrl(l.id, 0)}" rel="noopener"><span class="d">${l.d}</span><span><b>${l.t}</b><small>${l.x}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
+    <div class="card sec"><h3>Read Dada's comics</h3><p>Prefer reading? The Puzzle Trail is a free comic where you solve the clues with Anna and Chiklu.</p><a class="btn" href="#comics">Read the comic</a></div>
     <div class="card sec"><h3>Meet the cast</h3><p><b>Dimaag Dada</b> is the wise grandfather in India. <b>Anna</b> (9) and <b>Chiklu</b> (7) live in the Netherlands and visit him in the holidays. All three wear round black glasses, so they can see every clue.</p><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu" width="1005" height="698" loading="lazy" style="max-width:420px;width:100%"></div>`,
 
   books: () => `<h1>Books</h1>${bookStore()}
@@ -326,8 +340,8 @@ const VIEWS = {
     <h2>Email sign-up</h2><p>If you use the email sign-up box, you are only asked for an email address, you choose to give it, it is stored with our email service (Brevo), you confirm it by clicking a link in an email, and every email has an unsubscribe link. Brevo may count whether emails are opened or clicked. To have your address deleted, write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.</p>
     <h2>Children</h2><p>Dada is made for families. We do not ask children for any personal details.</p></div>`
 };
-const TITLES = { jigsaw:"Free online jigsaw · Dimaag Dada", home:"Dimaag Dada · Think first, then speak", daily:"Daily puzzle · Dimaag Dada", archive:"Puzzle archive · Dimaag Dada", world:"Dada World · Dimaag Dada", stories:"Stories · Dimaag Dada", books:"Books · Dimaag Dada", channels:"Join Dada · Dimaag Dada", about:"About · Dimaag Dada", privacy:"Privacy · Dimaag Dada" };
-const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["world","Dada World"],["stories","Stories"],["books","Books"],["channels","Join"],["about","About"]];
+const TITLES = { jigsaw:"Free online jigsaw · Dimaag Dada", home:"Dimaag Dada · Think first, then speak", daily:"Daily puzzle · Dimaag Dada", archive:"Puzzle archive · Dimaag Dada", play:"Play · Dimaag Dada", scenes:"Jigsaw scenes · Dimaag Dada", snakes:"Snakes & Sums · Dimaag Dada", ludo:"Dada Ludo · Dimaag Dada", chess:"Botu Chess · Dimaag Dada", comics:"Dada Comics · Dimaag Dada", shop:"Shop and Club · Dimaag Dada", stories:"Stories · Dimaag Dada", books:"Books · Dimaag Dada", channels:"Join Dada · Dimaag Dada", about:"About · Dimaag Dada", privacy:"Privacy · Dimaag Dada" };
+const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["play","Play"],["stories","Stories"],["books","Books"],["shop","Shop"],["channels","Join"],["about","About"]];
 
 const app = document.getElementById("app");
 function render(){
@@ -335,10 +349,11 @@ function render(){
   if (!VIEWS[r]) r = "home";
   app.innerHTML = VIEWS[r]();
   document.title = TITLES[r];
-  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${k === r ? ' aria-current="page"' : ""}>${n}</a>`).join("");
+  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r))) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   window.scrollTo(0, 0);
   document.getElementById("main").focus({ preventScroll: true });
   if (r === "jigsaw") setTimeout(() => startJigsaw());
+  fitFrame();
 }
 document.getElementById("foot-soc").innerHTML = socialHtml();
 addEventListener("hashchange", () => { dayOff = 0; render(); });
@@ -422,10 +437,10 @@ function snapSound(){ sfx("snap"); }
 function winSound(){ sfx("win"); }
 function jigsawPage(){
   const lv = JIGSAW.levels.map(([n, c, r], i) => `<button class="btn jzlv" data-lv="${i}">${n} · ${c * r} pieces</button>`).join("");
-  return `<p class="jzback"><a href="#world">← Dada World</a></p>
+  return `<p class="jzback"><a href="#play">← Play</a></p>
   <div class="eyebrow">Dimaag Dada · Free online jigsaw</div><h2>${JIGSAW.title}</h2>
   <p class="lead">Dada, Anna and Chiklu are hunting for the treasure chest, with Botu, Gullak Bhai and sneaky Udhaar Uncle on the stairs. Drag the pieces from the tray onto the board. A piece clicks in when it is in the right place.</p>
-  <p><a class="btn jzsm" href="world/">🧩 More free games in Dada World →</a></p>
+  <p><a class="btn jzsm" href="#scenes">🧩 More jigsaw scenes →</a></p>
   <div class="jzbar"><div class="jzlvs" role="group" aria-label="Difficulty">${lv}</div>
     <div class="jzstat"><span>⏱ <b id="jzt">0:00</b></span><span><b id="jzn">0</b> placed</span><label><input type="checkbox" id="jzghost" checked> Show picture</label><button class="btn jzsm" id="jzsnd" aria-label="Sound on or off">${jzSound ? "🔊" : "🔇"}</button><button class="btn jzsm" id="jznew">Shuffle</button></div></div>
   <div id="jzwin" class="jzwin" hidden></div>
@@ -544,7 +559,7 @@ const DADA = {
     [["another","next","more puzzle"], () => { DADA.last = PUZZLES[Math.floor(Math.random() * PUZZLES.length)]; return { text: "<b>Think first:</b> " + DADA.last.q, chips: ["Hint", "Show the answer"] }; }],
     [["puzzle","puzzles","riddle","daily","today","brain","today's"], () => { DADA.last = pick(0); return { text: "<b>Today's puzzle:</b> " + DADA.last.q + '<br><a href="#daily">Open the daily puzzle page</a>', chips: ["Hint", "Show the answer", "Another puzzle"] }; }],
     [["video","videos","watch","youtube","short","shorts","archive","story","stories","long"], () => ({ text: 'Every puzzle video is in the <a href="#archive">archive</a>, and the cartoon adventures are in <a href="#stories">Stories</a>. Or go straight to <a href="' + YT + '" rel="noopener">YouTube</a>.', chips: ["Join channels"] })],
-    [["game","games","play","ludo","chess","jigsaw","puzzle game","snakes","comic","comics","world"], () => ({ text: 'Play the <a href="#jigsaw">free jigsaw</a>, or open <a href="#world">Dada World</a> for snakes and sums, ludo, chess and comics.', chips: ["Today's puzzle"] })],
+    [["game","games","play","ludo","chess","jigsaw","puzzle game","snakes","comic","comics","world","shop"], () => ({ text: 'Play the <a href="#jigsaw">free jigsaw</a> or see everything on the <a href="#play">Play</a> page: snakes and sums, ludo, chess and comics. Books and the Dada Club are in the <a href="#shop">Shop</a>.', chips: ["Today's puzzle"] })],
     [["book","books","reasoning","buy","selection"], () => ({ text: 'The puzzle book is <b>Reasoning Samjho: Puzzle se Selection tak</b>, with 192 puzzles. See <a href="#books">Books</a>.', chips: ["Join channels"] })],
     [["whatsapp","telegram","channel","channels","join","follow","instagram","facebook","insta"], () => ({ text: 'Follow Dada on <a href="' + YT + '" rel="noopener">YouTube</a>, Instagram and Facebook. WhatsApp and Telegram work as a pair: all links and QR codes are on the <a href="#channels">Join page</a>.' })],
     [["install","app","download","phone"], () => ({ text: 'Tap the <b>Install app</b> button at the top of the page. It adds Dimaag Dada to your home screen and works offline.' })],

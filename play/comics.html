@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add("embed");</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dada Comics · Dada World</title>
+<title>Dada Comics · Dimaag Dada</title>
 <meta name="description" content="Dada Comics: read Dimaag Dada's puzzle comics with Anna and Chiklu. Solve each clue to turn the page. Works offline.">
 <meta name="theme-color" content="#0f181b">
 <link rel="manifest" href="manifest.webmanifest">
@@ -48,11 +50,12 @@ h1{font:800 22px/1 var(--disp);margin:0;flex:1}
 .fb{min-height:22px;margin-top:8px;font-weight:700}
 .end{text-align:center}.end img{width:84px;border-radius:50%;border:3px solid var(--amber)}
 @media (prefers-reduced-motion:no-preference){.page{animation:in .35s ease}@keyframes in{from{opacity:0;transform:translateX(18px)}}}
+.embed header.top,.embed nav.tabs,.embed .top{display:none!important}.embed body{background:transparent!important}.embed .wrap{max-width:none;padding-top:0}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a href="./" id="back">← Play</a><h1 id="ttl">Dada Comics</h1></div>
+  <div class="top"><a href="../#play" target="_top" id="back">← Play</a><h1 id="ttl">Dada Comics</h1></div>
   <div id="view"></div>
 </div>
 <script>

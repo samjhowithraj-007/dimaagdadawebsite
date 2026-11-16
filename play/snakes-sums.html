@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add("embed");</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Snakes &amp; Sums · Dada World</title>
+<title>Snakes &amp; Sums · Dimaag Dada</title>
 <meta name="description" content="Snakes &amp; Sums by Dimaag Dada: answer a sum to climb a ladder or escape a snake. 1 to 4 players, works offline.">
 <meta name="theme-color" content="#0f181b">
 <link rel="manifest" href="manifest.webmanifest">
@@ -48,11 +50,12 @@ svg.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opac
 .opts button.ok{background:var(--ok);color:#062022}.opts button.no{background:var(--bad)}
 .rules{margin-top:14px;color:var(--muted);font-size:14px}.rules b{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.tok{transition:none}}
+.embed header.top,.embed nav.tabs,.embed .top{display:none!important}.embed body{background:transparent!important}.embed .wrap{max-width:none;padding-top:0}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a href="./">← Play</a><h1>Snakes &amp; Sums</h1></div>
+  <div class="top"><a href="../#play" target="_top">← Play</a><h1>Snakes &amp; Sums</h1></div>
   <div id="setup" class="card setup">
     <p style="margin-top:0">Land on a ladder? Answer Dada's sum to climb. Land on a snake? Answer it right to escape!</p>
     <label><span>Maths level</span><select id="lvl"><option value="1">Easy: + and − up to 20</option><option value="2" selected>Medium: tables up to 10</option><option value="3">Hard: mixed up to 100</option></select></label>
