@@ -213,7 +213,7 @@ function clubTab(){
   <p class="foot" style="margin-top:14px">Free plan: 3 scenes, 1 daily puzzle, 1 free Club puzzle every week.</p>${testNote()}`;
 }
 function learnTab(){
-  const C = [["Reasoning for exams", "SSC · Bank · IT placement aptitude · 20 lessons", "#19e6e6", "#3ddc84"], ["Vedic maths tricks", "Fast mental maths · 12 lessons", "#ffb904", "#ff7a59"], ["Puzzle solving for kids", "Age 8–14 · 15 lessons", "#ea4cf7", "#ffb904"]];
+  const C = [["Reasoning for exams", "Competitive exam reasoning · 20 lessons", "#19e6e6", "#3ddc84"], ["Vedic maths tricks", "Fast mental maths · 12 lessons", "#ffb904", "#ff7a59"], ["Puzzle solving for kids", "Age 8–14 · 15 lessons", "#ea4cf7", "#ffb904"]];
   return `<div class="hero" style="min-height:190px"><img class="bg" src="img/learn.webp" alt="" style="opacity:.85"><span class="eyebrow">Learn with Dada</span><h2>Dimaag tez karo</h2><p>Video classes + practice puzzles</p></div>
   <div class="sec"><h3>Courses</h3><span>Coming soon</span></div>
   ${C.map(([t, d, a, b]) => `<div class="course"><div class="gx" style="background:linear-gradient(135deg,${a},${b})">Dada</div><div style="min-width:0"><b style="font-size:15px">${t}</b><p>${d}</p><a class="cta off" style="padding:6px 12px;font-size:12px" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Tell me when it opens</a></div></div>`).join("")}
