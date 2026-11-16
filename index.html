@@ -199,7 +199,7 @@ const SOCIAL = [
 ];
 const socialHtml = () => SOCIAL.map(s => `<li><a class="${s.cls || ""}" href="${s.u}" rel="noopener" aria-label="${s.n}" title="${s.n}" style="${s.c ? "--sb:" + s.c : ""}">${ICONS[s.i]}</a></li>`).join("");
 
-const SIGNUP = { action: "" };
+const SIGNUP = { action: "https://b84d134c.sibforms.com/serve/MUIFAHJI97JqzJSq1HcVSOpqGpH19NCHgnSq1ARVoqPYexs23XozXgTTMrEi4SWLPc5bV3bx_7Ho9Sj3uY8NCauoHKh13bpyJjotEqsYRMsL537sw_AgtsZvk8gOxOnJ2BY27Dbqj55NMjPAES9rh67Q6q-Ih5-eh6jPc263hbR8rk8FSkavXU_wh2Z9NbermhTBQYnx3Qge9-HSCg==" };
 const signup = lead => SIGNUP.action ? `<section class="card sec" id="signup"><h3>${lead}</h3><form id="su-form" action="${SIGNUP.action}" method="post"><label for="su-email" class="note">Your email</label><br><input id="su-email" name="EMAIL" type="email" required autocomplete="email" style="padding:10px 14px;border-radius:99px;border:2px solid var(--line);font-size:16px;max-width:100%"> <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" aria-hidden="true"><input type="hidden" name="locale" value="en"><input type="hidden" name="html_type" value="simple"> <button class="btn" type="submit">Notify me</button><p class="note" id="su-msg" role="status"></p></form></section>` : "";
 
 const PUZZLES = [
@@ -313,7 +313,7 @@ const VIEWS = {
 
   privacy: () => `<div class="prose"><h1>Privacy</h1>
     <ul><li>You do not need an account to use this site.</li><li>The site uses your browser's own storage only to remember your light or dark choice and to work offline. Nothing is sent to us.</li><li>There are no ads, no analytics and no tracking cookies.</li><li>This site is hosted on GitHub Pages, which keeps ordinary server logs.</li><li>Links to YouTube, Instagram, Facebook, X, WhatsApp, Telegram and our other sites take you to places with their own privacy rules.</li></ul>
-    <h2>Email sign-up</h2><p>There is no email sign-up yet. When we add one, you will only be asked for an email address, you choose to give it, it is stored with our email service (Brevo), and every email has an unsubscribe link. To have your address deleted, write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.</p>
+    <h2>Email sign-up</h2><p>If you use the email sign-up box, you are only asked for an email address, you choose to give it, it is stored with our email service (Brevo), you confirm it by clicking a link in an email, and every email has an unsubscribe link. Brevo may count whether emails are opened or clicked. To have your address deleted, write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.</p>
     <h2>Children</h2><p>Dada is made for families. We do not ask children for any personal details.</p></div>`
 };
 const TITLES = { home:"Dimaag Dada · Think first, then speak", daily:"Daily puzzle · Dimaag Dada", archive:"Puzzle archive · Dimaag Dada", world:"Dada World · Dimaag Dada", stories:"Stories · Dimaag Dada", books:"Books · Dimaag Dada", channels:"Join Dada · Dimaag Dada", about:"About · Dimaag Dada", privacy:"Privacy · Dimaag Dada" };
@@ -377,7 +377,7 @@ const DADA = {
     [["install","app","download","phone"], () => ({ text: 'Tap the <b>Install app</b> button at the top of the page. It adds Dimaag Dada to your home screen and works offline.' })],
     [["anna","chiklu","cast","who","dada","grandfather","glasses"], () => ({ text: 'Dimaag Dada is the wise grandfather. <b>Anna</b> (9) and <b>Chiklu</b> (7) are his grandchildren from the Netherlands. All three wear round black glasses! Read more on <a href="#about">About</a>.' })],
     [["exam","exams","competitive","school","quiz","interview","selection"], () => ({ text: "Dada's puzzles train careful thinking for school quizzes, interviews and competitive exams. Start with <a href=\"#daily\">today's puzzle</a>.", chips: ["Today's puzzle"] })],
-    [["email","newsletter","notify","subscribe","signup","sign"], () => ({ text: 'There is no email sign-up yet. Follow the <a href="#channels">channels</a> to hear first.' })],
+    [["email","newsletter","notify","subscribe","signup","sign"], () => ({ text: 'Use the sign-up box on the <a href="#home">home page</a> or <a href="#books">Books page</a>, or follow the <a href="#channels">channels</a>.' })],
     [["contact","write","mail","help"], () => ({ text: 'Write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.' })],
     [["privacy","tracking","cookies","data"], () => ({ text: 'No account, no ads, no tracking. Details on the <a href="#privacy">Privacy page</a>.' })],
     [["hello","hi","hey","namaste","hii"], () => ({ text: DADA.hello, chips: DADA.chips })],
