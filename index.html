@@ -90,6 +90,8 @@ main{min-height:100svh;padding:28px 0 56px}
 .sec{margin-top:44px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:14px}
 .tile{display:flex;flex-direction:column;gap:6px;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--line)}
+.item img.th{width:96px;height:72px;object-fit:cover;border-radius:10px;flex:none}.bkcard{display:flex;gap:16px;align-items:center}.bkcard img{width:120px;height:auto;border-radius:12px;flex:none}@media (max-width:520px){.bkcard{flex-direction:column;align-items:flex-start}.bkcard img{width:100%;max-height:200px;object-fit:cover}}
+.gtile{display:flex;flex-direction:column;background:var(--card);border:2px solid var(--line);border-radius:20px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--line)}.gtile:hover{transform:translateY(-2px)}.gtile img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--bg2)}.gtile span{display:flex;flex-direction:column;gap:2px;padding:12px 14px 14px}.gtile b{font:800 18px var(--disp)}.gtile small{color:var(--muted);font-size:14px}
 .tile:hover{transform:translateY(-2px)}
 .tile img{width:72px;height:72px;border-radius:18px;background:var(--bg2)}
 .tile b{font:800 18px var(--disp)} .tile small{color:var(--muted);font-size:14px}
@@ -244,21 +246,22 @@ const ARCHIVE = [
   { d:"29 Oct", t:"Sitting in a row, facing south", k:"puzzle", id:"C_VaKHVGnCQ", s:1 }
 ];
 const LONGS = [
-  { d:"14 Nov", t:"Dada's long-lost brother", x:"A 3D cartoon story with Dada, Anna and Chiklu, and five puzzles hidden inside it.", id:"eqUTFoLbVl8" },
-  { d:"3 Nov", t:"Toofan, the storm (3D cartoon)", x:"Why thunder comes after lightning, how sound and light travel, and why the sky is blue.", id:"cqqlqJ7lWjY" },
-  { d:"1 Nov", t:"Toofan, the storm (first version)", x:"The same storm story in the original 2D cartoon style.", id:"-iAgFjRuaX8" }
+  { d:"14 Nov", t:"Dada's long-lost brother", x:"A 3D cartoon story with Dada, Anna and Chiklu, and five puzzles hidden inside it.", id:"eqUTFoLbVl8", im:"play/scenes/mystery-house-sm.webp" },
+  { d:"3 Nov", t:"Toofan, the storm (3D cartoon)", x:"Why thunder comes after lightning, how sound and light travel, and why the sky is blue.", id:"cqqlqJ7lWjY", im:"play/scenes/space-lab-sm.webp" },
+  { d:"1 Nov", t:"Toofan, the storm (first version)", x:"The same storm story in the original 2D cartoon style.", id:"-iAgFjRuaX8", im:"play/scenes/train-journey-sm.webp" }
 ];
 const YT = "https://www.youtube.com/@DimaagDada";
 const ytUrl = (id, short) => short ? "https://www.youtube.com/shorts/" + id : "https://www.youtube.com/watch?v=" + id;
 
 const TILES = [
-  ["DD2","Logic puzzles","Clues, shapes and aha! moments","#daily"],
-  ["DD3","Maths adventures","Snakes, ladders and sums","#snakes"],
-  ["DD4","Jigsaws","A free online jigsaw, 3 levels","#jigsaw"],
-  ["DD5","Comics and stories","Dada's tales in pictures","#comics"],
-  ["DD6","Ludo","A classic family game","#ludo"],
-  ["DD7","Chess","Learn and play with Dada","#chess"]
+  ["play/img/learn.webp","Logic puzzles","Clues, shapes and aha! moments","#daily"],
+  ["play/img/snakes-sums.webp","Maths adventures","Snakes, ladders and sums","#snakes"],
+  ["play/scenes/mystery-house-sm.webp","Jigsaws","A free online jigsaw, 3 levels","#jigsaw"],
+  ["play/img/comics-trail.webp","Comics and stories","Dada's tales in pictures","#comics"],
+  ["play/img/ludo.webp","Ludo","A classic family game","#ludo"],
+  ["play/img/chess.webp","Chess","Learn and play with Dada","#chess"]
 ];
+const gtile = ([e, t, d, l]) => `<a class="gtile" href="${l}"><img src="${e}" alt="" width="480" height="360" loading="lazy"><span><b>${t}</b><small>${d}</small></span></a>`;
 const tile = ([e, t, d, l]) => `<a class="tile" href="${l}"${l.startsWith("http") ? ' rel="noopener"' : ""}><img src="img/${e}.webp" alt="" width="72" height="72" loading="lazy"><b>${t}</b><small>${d}</small></a>`;
 
 let dayOff = 0;
@@ -288,7 +291,7 @@ const VIEWS = {
       <ul class="stats"><li><b>1</b> new video every day</li><li><b>6</b> free games</li><li><b>192</b> puzzles in the book</li></ul></div>
     <figure class="hf"><div class="hchips" aria-label="Dada's adventures"><a class="hc hc1" href="#daily"><span>Logic puzzles</span><i>Clues, shapes and aha! moments</i></a><a class="hc hc2" href="#snakes"><span>Maths</span><i>Snakes, ladders and sums</i></a><a class="hc hc3" href="#jigsaw"><span>Jigsaws</span><i>A free online jigsaw</i></a><a class="hc hc4" href="#comics"><span>Stories</span><i>Dada's tales in pictures</i></a><a class="hc hc5" href="#chess"><span>Chess</span><i>Learn and play with Dada</i></a></div><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu, all three in round black glasses" width="1005" height="698"><figcaption>“Wait! Think first, then speak.”</figcaption></figure></section>
     <section class="sec"><h2>Today's puzzle</h2>${puzzleCard(0)}<p><a href="#daily">More puzzles →</a></p></section>
-    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(tile).join("")}</div><p class="note">The games are on the <a href="#play">Play</a> page.</p></section>
+    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(gtile).join("")}</div><p class="note">The games are on the <a href="#play">Play</a> page.</p></section>
     <section class="sec two"><div class="card"><p class="eyebrow">New every day</p><h3>Puzzle archive</h3><p>Every puzzle video, one tap away. Think first, then watch Dada's trick.</p><a class="btn" href="#archive">Open the archive</a></div>
       <div class="card"><p class="eyebrow">For exam practice</p><h3>Reasoning Samjho</h3><p>Our puzzle book: 192 puzzles that train you for school quizzes, interviews and competitive exams.</p><a class="btn" href="#books">About the book</a></div></section>
     <section class="sec"><h2>Never miss a puzzle</h2><p>Follow Dada where you like. WhatsApp and Telegram get the same channel updates.</p><ul class="soc">${socialHtml()}</ul><a class="btn ghost" href="#channels">All channels</a></section>${signup("Get a note when a new Dada book or game is ready")}`,
@@ -303,7 +306,7 @@ const VIEWS = {
     <p class="note">More videos are on the <a href="${YT}/shorts" rel="noopener">channel</a>. This list grows every day.</p>`,
 
   play: () => `<h1>Play</h1><p class="lead">Free games from Dimaag Dada. They work on phones and laptops, and offline once opened.</p>
-    <div class="grid">${[["DD2","Daily puzzle","Think first, then peek","#daily"],["DD4","Jigsaw: Mystery House","12, 24 or 48 pieces","#jigsaw"],["DD4","More jigsaw scenes","School trip, train journey, space lab and more","#scenes"],["DD3","Snakes &amp; Sums","Snakes, ladders and sums","#snakes"],["DD6","Dada Ludo","2 to 4 players","#ludo"],["DD7","Botu Chess","Learn and play with Botu","#chess"],["DD5","Dada Comics","The Puzzle Trail, read free","#comics"]].map(tile).join("")}</div>`,
+    <div class="grid">${[["play/img/learn.webp","Daily puzzle","Think first, then peek","#daily"],["play/scenes/mystery-house-sm.webp","Jigsaw: Mystery House","12, 24 or 48 pieces","#jigsaw"],["play/scenes/school-trip-sm.webp","More jigsaw scenes","School trip, train journey, space lab and more","#scenes"],["play/img/snakes-sums.webp","Snakes &amp; Sums","Snakes, ladders and sums","#snakes"],["play/img/ludo.webp","Dada Ludo","2 to 4 players","#ludo"],["play/img/chess.webp","Botu Chess","Learn and play with Botu","#chess"],["play/img/comics-trail.webp","Dada Comics","The Puzzle Trail, read free","#comics"]].map(gtile).join("")}</div>`,
 
   scenes: () => frame("play/?embed=1#/", "Jigsaw scenes", "Pick a scene and put it together. A new free puzzle every day."),
   snakes: () => frame("play/snakes-sums.html?embed=1", "Snakes & Sums"),
@@ -313,12 +316,12 @@ const VIEWS = {
   shop: () => frame("play/?embed=1#/shop", "Shop and Club", "Puzzle books, comics, stationery and the Dada Club."),
 
   stories: () => `<h1>Dada's stories</h1><p class="lead">3D cartoon adventures with Dada and his grandchildren, Anna and Chiklu. Puzzles are hidden inside every story.</p>
-    <ul class="list">${LONGS.map(l => `<li><a class="item" href="${ytUrl(l.id, 0)}" rel="noopener"><span class="d">${l.d}</span><span><b>${l.t}</b><small>${l.x}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
-    <div class="card sec"><h3>Read Dada's comics</h3><p>Prefer reading? The Puzzle Trail is a free comic where you solve the clues with Anna and Chiklu.</p><a class="btn" href="#comics">Read the comic</a></div>
+    <ul class="list">${LONGS.map(l => `<li><a class="item" href="${ytUrl(l.id, 0)}" rel="noopener"><img class="th" src="${l.im}" alt="" width="96" height="72" loading="lazy"><span class="d">${l.d}</span><span><b>${l.t}</b><small>${l.x}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
+    <div class="card sec bkcard"><img src="play/img/comics-trail.webp" alt="" width="120" height="160" loading="lazy"><div><h3>Read Dada's comics</h3><p>Prefer reading? The Puzzle Trail is a free comic where you solve the clues with Anna and Chiklu.</p><a class="btn" href="#comics">Read the comic</a></div></div>
     <div class="card sec"><h3>Meet the cast</h3><p><b>Dimaag Dada</b> is the wise grandfather in India. <b>Anna</b> (9) and <b>Chiklu</b> (7) live in the Netherlands and visit him in the holidays. All three wear round black glasses, so they can see every clue.</p><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu" width="1005" height="698" loading="lazy" style="max-width:420px;width:100%"></div>`,
 
   books: () => `<h1>Books</h1>${bookStore()}
-    <div class="card sec"><h3>More books are coming</h3><p>Stories for kids with Dada, Anna and Chiklu are in the works. Follow the channels to hear first.</p><a class="btn ghost" href="#channels">Follow Dada</a></div>${signup("Tell me when a new book arrives")}`,
+    <div class="card sec bkcard"><img src="play/img/comic/trail-1-cover.webp" alt="Anna and Chiklu with a treasure map" width="160" height="160" loading="lazy" style="object-fit:cover"><div><h3>Anna &amp; Chiklu's Puzzle Book</h3><p>Mazes, number puzzles and spot-the-difference for kids 7 to 12. Coming soon: follow the channels to hear first.</p><a class="btn ghost" href="#channels">Follow Dada</a></div></div>${signup("Tell me when a new book arrives")}`,
 
   jigsaw: () => jigsawPage(),
 
