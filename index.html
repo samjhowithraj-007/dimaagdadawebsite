@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dimaag Dada · Think first, then speak</title>
+<meta name="description" content="Dimaag Dada is a 3D cartoon grandfather with a puzzle for every day. Free puzzles, stories and games for kids, teens and grown-ups, with Anna and Chiklu.">
+<link rel="canonical" href="https://www.dimaagdada.com/">
+<link rel="icon" href="img/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3c1f5c">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dimaag Dada">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dimaag Dada: think first, then speak">
+<meta property="og:description" content="A puzzle for every day, stories and games with Dimaag Dada, Anna and Chiklu.">
+<meta property="og:url" content="https://www.dimaagdada.com/">
+<meta property="og:image" content="https://www.dimaagdada.com/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Dimaag Dada","url":"https://www.dimaagdada.com/","description":"Free daily puzzles, stories and games with Dimaag Dada, Anna and Chiklu.","inLanguage":"en"}</script>
+<script>
+try { var t = localStorage.getItem("dd-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<style>
+:root{
+  --bg:#fff3cf; --bg2:#ffe9a8; --ink:#3c1f5c; --muted:#5d4380; --card:#ffffff; --line:#f0dca0;
+  --accent:#7b3fd1; --accent-ink:#ffffff; --yellow:#ffcd44; --yellow-edge:#d99f1d; --bar:#3c1f5c; --bar-ink:#fff4d5;
+  --install:#151f26; --ok:#1f8f5a; --shadow:0 8px 24px rgba(60,31,92,.10);
+  --disp:"Trebuchet MS","Avenir Next",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#281b48; --bg2:#33235a; --ink:#fff4d5; --muted:#cdbfe6; --card:#352660; --line:#4b3a7a;
+    --accent:#c9a7ff; --accent-ink:#281b48; --bar:#1d1236; --bar-ink:#fff4d5; --shadow:0 8px 24px rgba(0,0,0,.35); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#281b48; --bg2:#33235a; --ink:#fff4d5; --muted:#cdbfe6; --card:#352660; --line:#4b3a7a;
+  --accent:#c9a7ff; --accent-ink:#281b48; --bar:#1d1236; --bar-ink:#fff4d5; --shadow:0 8px 24px rgba(0,0,0,.35); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);-webkit-tap-highlight-color:transparent;overflow-wrap:anywhere}
+a{color:var(--accent)} a:hover{text-decoration:none}
+h1,h2,h3{font-family:var(--disp);line-height:1.12;margin:0 0 .4em;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,60px);letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.4vw,32px)} h3{font-size:19px}
+p{margin:.4em 0 1em} img{max-width:100%;height:auto}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.skip{position:absolute;left:-999px;top:0;background:var(--yellow);color:#3c1f5c;padding:8px 14px;z-index:100;font-weight:700}
+.skip:focus{left:8px;top:8px}
+header.bar{position:sticky;top:0;z-index:50;background:var(--bar);color:var(--bar-ink);padding-top:env(safe-area-inset-top)}
+.bar .row{display:flex;align-items:center;gap:10px;padding:8px 16px;max-width:1100px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--bar-ink);white-space:nowrap;min-width:0}
+.brand img{width:38px;height:38px;border-radius:50%}
+.brand b{font:800 20px/1 var(--disp)} .brand small{display:block;font:600 11px var(--body);opacity:.8;margin-top:2px}
+.sp{flex:1}
+.ib{border:1px solid rgba(255,244,213,.35);background:transparent;color:var(--bar-ink);border-radius:999px;width:38px;height:38px;font-size:17px;cursor:pointer;display:grid;place-items:center}
+.install{display:inline-flex;align-items:center;gap:7px;font:700 13px var(--body);border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:5px 12px 5px 6px;background:var(--install);color:#fff;cursor:pointer;white-space:nowrap;animation:pop 1.4s ease-out 3}
+.install img{width:28px;height:28px;border-radius:50%}
+.install:hover{animation-play-state:paused}
+@keyframes pop{0%{box-shadow:0 0 0 0 rgba(255,205,68,.8);transform:scale(1)}30%{transform:scale(1.07)}100%{box-shadow:0 0 0 10px rgba(255,205,68,0);transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.install{animation:none}html{scroll-behavior:auto}}
+@media (display-mode:standalone){.install{display:none!important}}
+@media (max-width:420px){.install-x{display:none}}
+nav.tabs{max-width:1100px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:0 16px 8px;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{flex:none;color:var(--bar-ink);text-decoration:none;font-weight:700;font-size:14px;padding:6px 13px;border-radius:99px;border:1px solid transparent}
+nav.tabs a[aria-current="page"]{background:var(--yellow);color:#3c1f5c}
+nav.tabs a:hover{border-color:rgba(255,244,213,.5)}
+main{min-height:100svh;padding:28px 0 56px}
+.btn{display:inline-block;background:var(--yellow);color:#3c1f5c;font-weight:800;border:0;border-radius:999px;padding:12px 22px;text-decoration:none;box-shadow:0 4px 0 var(--yellow-edge);cursor:pointer;font-size:16px;font-family:inherit;margin:4px 8px 8px 0}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--yellow-edge)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:2px solid var(--ink)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+.eyebrow{font:800 13px var(--disp);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:0 0 8px}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:center}
+.hero em{font-style:normal;color:var(--accent)}
+.hero .lead{font-size:18px;color:var(--muted)}
+.hero figure{margin:0;text-align:center}
+.hero figure img{width:100%;max-width:520px}
+.hero figcaption{font:italic 700 18px var(--disp);color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;padding:0;margin:14px 0 0;color:var(--muted);font-weight:600}
+.stats b{color:var(--ink);font-size:20px}
+.sec{margin-top:44px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:14px}
+.tile{display:flex;flex-direction:column;gap:6px;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--line)}
+.tile:hover{transform:translateY(-2px)}
+.tile img{width:72px;height:72px;border-radius:18px;background:var(--bg2)}
+.tile b{font:800 18px var(--disp)} .tile small{color:var(--muted);font-size:14px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.puz-q{font:700 22px/1.4 var(--disp);margin:6px 0 14px}
+.puz-box{display:none;margin-top:12px;padding:14px;border-radius:14px;background:var(--bg2);border:2px dashed var(--accent)}
+.puz-box.on{display:block}
+.puz-box b{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 14px;font-weight:700;cursor:pointer;font:700 14px var(--body)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.list{display:grid;gap:10px;list-style:none;padding:0;margin:0}
+.item{display:flex;gap:12px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.item:hover{border-color:var(--accent)}
+.item .d{flex:none;font:700 12px var(--body);color:var(--muted);background:var(--bg2);border-radius:99px;padding:4px 10px;min-width:64px;text-align:center}
+.item b{display:block} .item small{color:var(--muted)}
+.item .go{margin-left:auto;font-weight:800;color:var(--accent);white-space:nowrap}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.qr{display:flex;gap:14px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px}
+.qr img{width:92px;height:92px;border-radius:10px;background:#fff;padding:4px;flex:none}
+.soc{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:10px 0}
+.soc a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--sb,var(--ink));color:#fff;text-decoration:none}
+.soc svg{width:22px;height:22px;fill:currentColor}
+.soc a.xx{--sb:#111}
+:root[data-theme="dark"] .soc a.xx{background:#fff;color:#111}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .soc a.xx{background:#fff;color:#111}}
+.soc a.xx svg{fill:currentColor}
+.prose{max-width:760px}
+.prose ul{padding-left:20px}
+.note{font-size:14px;color:var(--muted)}
+footer{background:var(--bar);color:var(--bar-ink);padding:28px 0 36px;margin-top:0}
+footer a{color:var(--bar-ink)} footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:20px}
+footer h4{margin:0 0 8px;font:800 15px var(--disp)} footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14px}
+footer .fine{margin-top:20px;font-size:13px;opacity:.85}
+footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);background:transparent}
+.install-help{border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);padding:22px;max-width:min(440px,calc(100vw - 32px));font-size:15.5px}
+.install-help::backdrop{background:rgba(0,0,0,.5)}
+.install-help ol{padding-left:20px} .install-help li{margin:6px 0}
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)} .hero figure{order:-1}
+  .two,.pair{grid-template-columns:minmax(0,1fr)}
+  .item{flex-wrap:wrap} .item .go{margin-left:0}
+  .brand small{display:none}
+}
+@media (max-width:420px){ .brand b{font-size:18px} .bar .row{gap:6px} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="row">
+    <a class="brand" href="#home" aria-label="Dimaag Dada home"><img src="img/icon-192.png" alt="" width="38" height="38"><span><b>Dimaag Dada</b><small>Think first, then speak</small></span></a>
+    <span class="sp"></span>
+    <button class="install" id="install" type="button"><img src="img/icon-192.png" alt="" width="28" height="28">Install<span class="install-x"> app</span></button>
+    <button class="ib" id="theme" type="button" aria-label="Switch light or dark theme" title="Light / dark">☾</button>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Main"></nav>
+</header>
+<main id="main" tabindex="-1"><div class="wrap" id="app"></div></main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Dimaag Dada</h4><p style="margin:0;font-size:14px">A 3D cartoon grandfather with a puzzle for every day. Channel run by Raj (Samjho with Raj).</p><ul class="soc" id="foot-soc"></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="#daily">Daily puzzle</a></li><li><a href="#archive">Puzzle archive</a></li><li><a href="#world">Dada World</a></li><li><a href="#stories">Stories</a></li><li><a href="#books">Books</a></li></ul></div>
+      <div><h4>Join Dada</h4><ul><li><a href="#channels">All channels</a></li><li><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">WhatsApp channel</a></li><li><a href="https://t.me/dimaagdada" rel="noopener">Telegram channel</a></li></ul></div>
+      <div><h4>Samjho with Raj</h4><ul><li><a href="https://www.techsamjhoraj.com/" rel="noopener">Tech Samjho Raj</a></li><li><a href="https://www.paisasamjhoraj.com/" rel="noopener">Paisa Samjho Raj</a></li><li><a href="#about">About</a></li><li><a href="#privacy">Privacy</a></li></ul></div>
+    </div>
+    <p class="fine">No ads · No tracking · <a href="#privacy">Privacy</a> · All stories and puzzles are original.</p>
+  </div>
+</footer>
+<dialog class="install-help" id="install-help" aria-labelledby="ih-title"><h3 id="ih-title">Install the app</h3><div class="ih-body"></div><button class="btn" type="button" data-close>Got it</button></dialog>
+
+<script>
+const ICONS = {
+  youtube:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg>',
+  instagram:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.2-3.3a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>',
+  facebook:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8.5V7c0-.7.2-1 1.1-1H17V3h-2.6C11.8 3 11 4.5 11 6.6V8.5H8.5V12H11v9h3v-9h2.6l.4-3.5z"/></svg>',
+  x:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 3h3L14.2 10.5 22 21h-6.1l-4.8-6.3L5.6 21h-3l7-8L2 3h6.3l4.3 5.8L17.8 3zm-1 16.2h1.7L7.3 4.7H5.5l11.3 14.5z"/></svg>',
+  whatsapp:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.2 13.9c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.5.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>',
+  telegram:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.3 2.8 11.5c-1.3.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.1.8.8.8.5 0 .7-.2 1-.5l2.3-2.3 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.2-.4-1.8-1.4-1.4zM8.6 13.5l9.6-6c.5-.3.9-.1.5.2l-7.9 7.1-.3 3.3-1.9-4.6z"/></svg>'
+};
+const SOCIAL = [
+  { n:"YouTube", i:"youtube", c:"#ff0000", u:"https://www.youtube.com/@DimaagDada" },
+  { n:"Instagram", i:"instagram", c:"#e1306c", u:"https://www.instagram.com/dimaagdada/" },
+  { n:"Facebook", i:"facebook", c:"#1877f2", u:"https://www.facebook.com/dimaagdada" },
+  { n:"X (Samjho with Raj)", i:"x", c:"", u:"https://x.com/samjhowithraj", cls:"xx" },
+  { n:"WhatsApp channel", i:"whatsapp", c:"#25d366", u:"https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" },
+  { n:"Telegram channel", i:"telegram", c:"#229ed9", u:"https://t.me/dimaagdada" }
+];
+const socialHtml = () => SOCIAL.map(s => `<li><a class="${s.cls || ""}" href="${s.u}" rel="noopener" aria-label="${s.n}" title="${s.n}" style="${s.c ? "--sb:" + s.c : ""}">${ICONS[s.i]}</a></li>`).join("");
+
+const SIGNUP = { action: "" };
+const signup = lead => SIGNUP.action ? `<section class="card sec" id="signup"><h3>${lead}</h3><form id="su-form" action="${SIGNUP.action}" method="post"><label for="su-email" class="note">Your email</label><br><input id="su-email" name="EMAIL" type="email" required autocomplete="email" style="padding:10px 14px;border-radius:99px;border:2px solid var(--line);font-size:16px;max-width:100%"> <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" aria-hidden="true"><input type="hidden" name="locale" value="en"><input type="hidden" name="html_type" value="simple"> <button class="btn" type="submit">Notify me</button><p class="note" id="su-msg" role="status"></p></form></section>` : "";
+
+const PUZZLES = [
+  { q:"A notebook and a pen cost 110 together. The notebook costs 100 more than the pen. How much is the pen?", h:"Be careful: the answer is not 10.", a:"5", w:"Pen 5, notebook 105: they add to 110 and differ by 100. If the pen were 10, the total would be 120." },
+  { q:"A farmer has 17 sheep. All but 9 run away. How many sheep are left?", h:"Read “all but 9” slowly.", a:"9", w:"“All but 9” means 9 did not run away." },
+  { q:"What is the angle between the hands of a clock at exactly 3:00?", h:"The 12 numbers split a full circle of 360°.", a:"90°", w:"Each hour mark is 360 ÷ 12 = 30°, and the hands are 3 marks apart: 3 × 30 = 90°." },
+  { q:"Find the next number: 2, 6, 12, 20, 30, ?", h:"Look at the gaps between numbers.", a:"42", w:"The gaps are 4, 6, 8, 10, so the next gap is 12: 30 + 12 = 42." },
+  { q:"A father is 4 times as old as his son. In 5 years he will be 3 times as old. How old is the son now?", h:"Let the son be x. The father is 4x.", a:"10 years", w:"4x + 5 = 3(x + 5) gives x = 10. Father 40, son 10; in 5 years 45 and 15." },
+  { q:"Two trains are 120 km apart and run towards each other, one at 40 km/h and one at 20 km/h. After how many hours do they meet?", h:"Add their speeds: they close the gap together.", a:"2 hours", w:"They close 40 + 20 = 60 km every hour, and 120 ÷ 60 = 2." },
+  { q:"If CAT is written as 24 (C=3, A=1, T=20, added up), what is DOG?", h:"A=1, B=2, C=3 and so on.", a:"26", w:"D=4, O=15, G=7: 4 + 15 + 7 = 26." },
+  { q:"In a code, MANGO is written as NBOHP. How is APPLE written?", h:"Compare M with N, A with B.", a:"BQQMF", w:"Every letter moves one step forward: A→B, P→Q, P→Q, L→M, E→F." },
+  { q:"Which number is the odd one out? 8, 27, 64, 100, 125", h:"Think of 2 × 2 × 2 = 8.", a:"100", w:"The others are cubes: 2³, 3³, 4³ and 5³. 100 is not a cube." },
+  { q:"Meera walks 3 km north and then 4 km east. How far is she from where she started, in a straight line?", h:"Draw it. Two sides of a triangle.", a:"5 km", w:"A right triangle with sides 3 and 4 has a longest side of 5 (3² + 4² = 5²)." },
+  { q:"Six friends meet and every person shakes hands once with every other person. How many handshakes in all?", h:"Each person shakes 5 hands, but each handshake is counted twice.", a:"15", w:"6 × 5 ÷ 2 = 15." },
+  { q:"Today is Wednesday. What day will it be 100 days from today?", h:"Weeks repeat every 7 days. Find the leftover.", a:"Friday", w:"100 = 14 weeks + 2 days. Two days after Wednesday is Friday." },
+  { q:"A price of 200 goes up by 10%, and then the new price goes down by 10%. What is the final price?", h:"The second 10% is of the new price.", a:"198", w:"200 + 20 = 220; 10% of 220 is 22; 220 − 22 = 198." },
+  { q:"How many squares of any size are there in a 2 × 2 grid of small squares?", h:"Count the small ones, then the big one.", a:"5", w:"4 small squares plus the 1 big square around all of them." }
+];
+
+const ARCHIVE = [
+  { d:"14 Nov", t:"Blood relations: your first one", k:"puzzle", id:"jX9EZMBfabg", s:1 },
+  { d:"14 Nov", t:"Dada's brother, Chiklu's what?", k:"puzzle", id:"6Z6IjA5Icbw", s:1 },
+  { d:"8 Nov", t:"The box stack puzzle", k:"puzzle", id:"_CEXMwb0o9s", s:1 },
+  { d:"6 Nov", t:"Floors and colours: who likes white?", k:"puzzle", id:"-GcyU5XVWn8", s:1 },
+  { d:"5 Nov", t:"Five friends, five floors", k:"puzzle", id:"L26TFhTza6c", s:1 },
+  { d:"4 Nov", t:"Sitting in a row, facing north", k:"puzzle", id:"j3caBd45Gls", s:1 },
+  { d:"3 Nov", t:"Round table: inside and outside facing", k:"puzzle", id:"lfvgIdnXT-c", s:1 },
+  { d:"3 Nov", t:"Toofan: why is the sky blue?", k:"science", id:"XXZB4QmCHnw", s:1 },
+  { d:"3 Nov", t:"Toofan: which way am I facing?", k:"puzzle", id:"1K0PF-CZJ64", s:1 },
+  { d:"3 Nov", t:"Toofan: lightning, thunder and distance", k:"science", id:"xJE6sxxWsXw", s:1 },
+  { d:"1 Nov", t:"Lightning first, thunder later", k:"science", id:"a6sPRFlSZfI", s:1 },
+  { d:"29 Oct", t:"Sitting in a row, facing south", k:"puzzle", id:"C_VaKHVGnCQ", s:1 }
+];
+const LONGS = [
+  { d:"14 Nov", t:"Dada's long-lost brother", x:"A 3D cartoon story with Dada, Anna and Chiklu, and five puzzles hidden inside it.", id:"eqUTFoLbVl8" },
+  { d:"3 Nov", t:"Toofan, the storm (3D cartoon)", x:"Why thunder comes after lightning, how sound and light travel, and why the sky is blue.", id:"cqqlqJ7lWjY" },
+  { d:"1 Nov", t:"Toofan, the storm (first version)", x:"The same storm story in the original 2D cartoon style.", id:"-iAgFjRuaX8" }
+];
+const YT = "https://www.youtube.com/@DimaagDada";
+const ytUrl = (id, short) => short ? "https://www.youtube.com/shorts/" + id : "https://www.youtube.com/watch?v=" + id;
+
+const BOOK = "https://www.techsamjhoraj.com/#puzzles";
+const WORLD = "https://www.techsamjhoraj.com/puzzles/";
+const TILES = [
+  ["DD2","Logic puzzles","Clues, shapes and aha! moments","#daily"],
+  ["DD3","Maths adventures","Snakes, ladders and sums","https://www.techsamjhoraj.com/puzzles/snakes-sums.html"],
+  ["DD4","Jigsaws","A free online jigsaw, 3 levels","https://www.techsamjhoraj.com/#jigsaw"],
+  ["DD5","Comics and stories","Dada's tales in pictures","https://www.techsamjhoraj.com/puzzles/comics.html"],
+  ["DD6","Ludo","A classic family game","https://www.techsamjhoraj.com/puzzles/ludo.html"],
+  ["DD7","Chess","Learn and play with Dada","https://www.techsamjhoraj.com/puzzles/chess.html"]
+];
+const tile = ([e, t, d, l]) => `<a class="tile" href="${l}"${l.startsWith("http") ? ' rel="noopener"' : ""}><img src="img/${e}.webp" alt="" width="72" height="72" loading="lazy"><b>${t}</b><small>${d}</small></a>`;
+
+let dayOff = 0;
+const dayIndex = off => Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000) + off;
+const pick = off => PUZZLES[((dayIndex(off) % PUZZLES.length) + PUZZLES.length) % PUZZLES.length];
+const dayLabel = off => { const d = new Date(Date.now() + off * 86400000); return d.toLocaleDateString("en-IN", { weekday:"long", day:"numeric", month:"long" }); };
+
+function puzzleCard(off){
+  const p = pick(off);
+  return `<div class="card" id="puz"><p class="eyebrow">${off === 0 ? "Today's puzzle" : "An earlier puzzle"} · ${dayLabel(off)}</p><p class="puz-q">${p.q}</p>
+    <button class="btn ghost" type="button" data-act="hint">Need a hint?</button><button class="btn" type="button" data-act="ans">Show the answer</button>
+    <div class="puz-box" id="hint-box"><b>Hint:</b> ${p.h}</div>
+    <div class="puz-box" id="ans-box"><b>Answer: ${p.a}.</b> ${p.w}</div></div>`;
+}
+
+const VIEWS = {
+  home: () => `<section class="hero"><div><p class="eyebrow">Dimaag Dada</p><h1>A puzzle for <em>every curious mind.</em></h1>
+      <p class="lead">Meet Dimaag Dada, Anna and Chiklu. Puzzles, stories and games that make you stop, think and say “aha!”. Free, for kids, teens and grown-ups.</p>
+      <a class="btn" href="#daily">Try today's puzzle</a><a class="btn ghost" href="${YT}" rel="noopener">Watch on YouTube</a>
+      <ul class="stats"><li><b>1</b> new video every day</li><li><b>6</b> free games</li><li><b>192</b> puzzles in the book</li></ul></div>
+    <figure><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu, all three in round black glasses" width="1005" height="698"><figcaption>“Wait! Think first, then speak.”</figcaption></figure></section>
+    <section class="sec"><h2>Today's puzzle</h2>${puzzleCard(0)}<p><a href="#daily">More puzzles →</a></p></section>
+    <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(tile).join("")}</div><p class="note">The games live in Dada World and open in a new page for now.</p></section>
+    <section class="sec two"><div class="card"><p class="eyebrow">New every day</p><h3>Puzzle archive</h3><p>Every puzzle video, one tap away. Think first, then watch Dada's trick.</p><a class="btn" href="#archive">Open the archive</a></div>
+      <div class="card"><p class="eyebrow">For exam practice</p><h3>Reasoning Samjho</h3><p>Our puzzle book: 192 puzzles that train you for school quizzes, interviews and competitive exams.</p><a class="btn" href="#books">About the book</a></div></section>
+    <section class="sec"><h2>Never miss a puzzle</h2><p>Follow Dada where you like. WhatsApp and Telegram get the same channel updates.</p><ul class="soc">${socialHtml()}</ul><a class="btn ghost" href="#channels">All channels</a></section>${signup("Get a note when a new Dada book or game is ready")}`,
+
+  daily: () => `<h1>Daily puzzle</h1><p class="lead">One original puzzle a day. Think first, then peek.</p>${puzzleCard(dayOff)}
+    <p><button class="btn ghost" type="button" data-act="prev">← Earlier puzzle</button>${dayOff < 0 ? '<button class="btn ghost" type="button" data-act="next">Later puzzle →</button><button class="btn" type="button" data-act="today">Back to today</button>' : ""}</p>
+    <div class="card sec"><h3>Want Dada to explain it?</h3><p>Every day a new puzzle video goes up on the channel, with a trick you can use in exams and quizzes.</p><a class="btn" href="#archive">Puzzle archive</a><a class="btn ghost" href="${YT}/shorts" rel="noopener">Latest Shorts</a></div>`,
+
+  archive: () => `<h1>Puzzle archive</h1><p class="lead">Every Dada puzzle and science video, newest first. Each one starts with a question: pause, think, then watch the trick.</p>
+    <div class="chips" role="group" aria-label="Filter"><button class="chip" type="button" data-f="all" aria-pressed="true">All</button><button class="chip" type="button" data-f="puzzle" aria-pressed="false">Puzzles</button><button class="chip" type="button" data-f="science" aria-pressed="false">Science</button></div>
+    <ul class="list" id="arch">${ARCHIVE.map(a => `<li data-k="${a.k}"><a class="item" href="${ytUrl(a.id, a.s)}" rel="noopener"><span class="d">${a.d}</span><span><b>${a.t}</b><small>${a.k === "puzzle" ? "Puzzle Short" : "Science Short"}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
+    <p class="note">More videos are on the <a href="${YT}/shorts" rel="noopener">channel</a>. This list grows every day.</p>`,
+
+  world: () => `<h1>Dada World</h1><p class="lead">Free games and comics from Dimaag Dada. They work offline once opened.</p>
+    <div class="grid">${TILES.map(tile).join("")}</div>
+    <div class="card sec"><h3>Open the whole of Dada World</h3><p>Play, the Dada Club, Learn and the Dada Shop live in one app. We are moving it onto this site soon.</p><a class="btn" href="${WORLD}" rel="noopener">Open Dada World</a></div>`,
+
+  stories: () => `<h1>Dada's stories</h1><p class="lead">3D cartoon adventures with Dada and his grandchildren, Anna and Chiklu. Puzzles are hidden inside every story.</p>
+    <ul class="list">${LONGS.map(l => `<li><a class="item" href="${ytUrl(l.id, 0)}" rel="noopener"><span class="d">${l.d}</span><span><b>${l.t}</b><small>${l.x}</small></span><span class="go">Watch ▶</span></a></li>`).join("")}</ul>
+    <div class="card sec"><h3>Meet the cast</h3><p><b>Dimaag Dada</b> is the wise grandfather in India. <b>Anna</b> (9) and <b>Chiklu</b> (7) live in the Netherlands and visit him in the holidays. All three wear round black glasses, so they can see every clue.</p><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu" width="1005" height="698" loading="lazy" style="max-width:420px;width:100%"></div>`,
+
+  books: () => `<h1>Books</h1><div class="two"><div class="card"><p class="eyebrow">Puzzle book</p><h2>Reasoning Samjho: Puzzle se Selection tak</h2><p>192 original puzzles with Dada's tricks, written to build sharp thinking for school quizzes, interviews and competitive exams. The book is written in Hinglish.</p><a class="btn" href="${BOOK}" rel="noopener">See the book on Tech Samjho Raj</a></div>
+    <div class="card"><h3>More books are coming</h3><p>Stories for kids with Dada, Anna and Chiklu are in the works. Follow the channels to hear first.</p><a class="btn ghost" href="#channels">Follow Dada</a></div></div>${signup("Tell me when a new book arrives")}`,
+
+  channels: () => `<h1>Join Dada everywhere</h1><p class="lead">Pick your favourite place. WhatsApp and Telegram bring the channel updates straight to your phone.</p>
+    <ul class="soc">${socialHtml()}</ul>
+    <div class="pair sec"><div class="qr"><img src="img/qr-whatsapp.png" alt="QR code for the Dimaag Dada WhatsApp channel" width="92" height="92" loading="lazy"><div><h3>WhatsApp channel</h3><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">Open the channel</a></div></div>
+    <div class="qr"><img src="img/qr-telegram.png" alt="QR code for the Dimaag Dada Telegram channel" width="92" height="92" loading="lazy"><div><h3>Telegram channel</h3><a href="https://t.me/dimaagdada" rel="noopener">Open the channel</a></div></div></div>
+    <p class="note">X is shared with Samjho with Raj, so it shows all three channels.</p>`,
+
+  about: () => `<div class="prose"><h1>About Dimaag Dada</h1>
+    <p>Dimaag Dada (“Dada” means grandfather) is a 3D cartoon grandfather who loves puzzles. His motto: <b>“Wait! Think first, then speak.”</b></p>
+    <p>Every video asks one question. You get time to think before Dada shows the trick, so you learn how to solve the next one yourself. The puzzles help with school quizzes, interviews and competitive exams, and they are fun for the whole family.</p>
+    <h2>The cast</h2><ul><li><b>Dimaag Dada</b>: bald, white tufts, moustache and round black glasses.</li><li><b>Anna</b> (9): ponytail, coral dungarees and round glasses.</li><li><b>Chiklu</b> (7): spiky hair, blue hoodie and round glasses.</li></ul>
+    <p>All stories and puzzles are original. The channel is made by Raj, who also runs <a href="https://www.techsamjhoraj.com/" rel="noopener">Tech Samjho Raj</a> and <a href="https://www.paisasamjhoraj.com/" rel="noopener">Paisa Samjho Raj</a>. Some pictures and clips are made with AI tools, and we say so on the videos that use them.</p>
+    <h2>Contact</h2><p>Write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.</p></div>`,
+
+  privacy: () => `<div class="prose"><h1>Privacy</h1>
+    <ul><li>You do not need an account to use this site.</li><li>The site uses your browser's own storage only to remember your light or dark choice and to work offline. Nothing is sent to us.</li><li>There are no ads, no analytics and no tracking cookies.</li><li>This site is hosted on GitHub Pages, which keeps ordinary server logs.</li><li>Links to YouTube, Instagram, Facebook, X, WhatsApp, Telegram and our other sites take you to places with their own privacy rules.</li></ul>
+    <h2>Email sign-up</h2><p>There is no email sign-up yet. When we add one, you will only be asked for an email address, you choose to give it, it is stored with our email service (Brevo), and every email has an unsubscribe link. To have your address deleted, write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.</p>
+    <h2>Children</h2><p>Dada is made for families. We do not ask children for any personal details.</p></div>`
+};
+const TITLES = { home:"Dimaag Dada · Think first, then speak", daily:"Daily puzzle · Dimaag Dada", archive:"Puzzle archive · Dimaag Dada", world:"Dada World · Dimaag Dada", stories:"Stories · Dimaag Dada", books:"Books · Dimaag Dada", channels:"Join Dada · Dimaag Dada", about:"About · Dimaag Dada", privacy:"Privacy · Dimaag Dada" };
+const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["world","Dada World"],["stories","Stories"],["books","Books"],["channels","Join"],["about","About"]];
+
+const app = document.getElementById("app");
+function render(){
+  let r = (location.hash || "#home").slice(1).split("?")[0];
+  if (!VIEWS[r]) r = "home";
+  app.innerHTML = VIEWS[r]();
+  document.title = TITLES[r];
+  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${k === r ? ' aria-current="page"' : ""}>${n}</a>`).join("");
+  window.scrollTo(0, 0);
+  document.getElementById("main").focus({ preventScroll: true });
+}
+document.getElementById("foot-soc").innerHTML = socialHtml();
+addEventListener("hashchange", () => { dayOff = 0; render(); });
+app.addEventListener("click", e => {
+  const b = e.target.closest("[data-act],[data-f]"); if (!b) return;
+  if (b.dataset.act === "hint") document.getElementById("hint-box").classList.toggle("on");
+  else if (b.dataset.act === "ans") document.getElementById("ans-box").classList.toggle("on");
+  else if (b.dataset.act) {
+    if (b.dataset.act === "prev") dayOff = Math.max(dayOff - 1, -(PUZZLES.length - 1));
+    if (b.dataset.act === "next") dayOff = Math.min(dayOff + 1, 0);
+    if (b.dataset.act === "today") dayOff = 0;
+    const y = scrollY; app.innerHTML = VIEWS.daily(); scrollTo(0, y);
+  } else if (b.dataset.f) {
+    app.querySelectorAll("[data-f]").forEach(c => c.setAttribute("aria-pressed", c === b ? "true" : "false"));
+    app.querySelectorAll("#arch li").forEach(li => { li.hidden = b.dataset.f !== "all" && li.dataset.k !== b.dataset.f; });
+  }
+});
+app.addEventListener("submit", e => {
+  const f = e.target.closest("#su-form"); if (!f) return;
+  e.preventDefault();
+  fetch(f.action, { method:"POST", body:new FormData(f), mode:"no-cors" }).catch(() => {});
+  document.getElementById("su-msg").textContent = "Thanks! Check your inbox to confirm.";
+});
+document.getElementById("theme").addEventListener("click", () => {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = document.documentElement.getAttribute("data-theme") || (dark ? "dark" : "light");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("dd-theme", next); } catch (e) {}
+});
+render();
+</script>
+<script>
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+const ua = navigator.userAgent;
+const isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+const isAndroid = /Android/.test(ua);
+const inApp = /Instagram|FBAN|FBAV|FB_IAB|WhatsApp|Line\/|; wv\)|Snapchat/.test(ua) || (isIOS && !/Safari\//.test(ua));
+let installEvt = null;
+const installBtn = document.getElementById("install"), help = document.getElementById("install-help");
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; });
+addEventListener("appinstalled", () => { installBtn.hidden = true; installEvt = null; });
+function installSteps(){
+  const site = location.host.replace(/^www\./, "");
+  if (inApp) return `<p>You opened this page inside another app (WhatsApp, Instagram or Facebook). Apps can only be installed from your phone's own browser.</p><ol><li>Tap the <b>⋮</b> or <b>⋯</b> menu.</li><li>Choose <b>${isIOS ? "Open in Safari" : "Open in Chrome"}</b>.</li><li>Then tap <b>Install app</b> again.</li></ol><p>Or open ${isIOS ? "Safari" : "Chrome"} yourself and type <b>${site}</b> in the address bar.</p>`;
+  if (isIOS) return /CriOS|FxiOS|EdgiOS/.test(ua)
+    ? `<ol><li>Tap <b>Share</b> in the address bar (top right), or <b>⋯</b> then <b>Share</b>.</li><li>Tap <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>.</li></ol><p>Needs iOS 16.4 or newer. On an older iPhone, use Safari.</p>`
+    : `<ol><li>Tap <b>Share</b> in the bar at the bottom of Safari (or <b>⋯</b> then <b>Share</b>).</li><li>Scroll and tap <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b> at the top right.</li></ol>`;
+  if (isAndroid) return `<ol><li>Tap the <b>⋮</b> menu at the top right of Chrome.</li><li>Tap <b>Install app</b> (or <b>Add to Home screen</b>).</li><li>Tap <b>Install</b>.</li></ol><p>Make sure you opened <b>${site}</b> in Chrome itself, not inside WhatsApp or Instagram.</p>`;
+  return `<ul><li><b>Chrome:</b> click the install icon at the right of the address bar, or ⋮ → Cast, save and share → Install page as app.</li><li><b>Edge:</b> ⋯ → Apps → Install this site as an app.</li><li><b>Safari (Mac):</b> File → Add to Dock.</li><li><b>Firefox:</b> cannot install web apps. Use Chrome or Edge.</li></ul>`;
+}
+installBtn.addEventListener("click", async () => {
+  if (installEvt) { installEvt.prompt(); const r = await installEvt.userChoice; installEvt = null; if (r.outcome === "accepted") installBtn.hidden = true; return; }
+  help.querySelector(".ih-body").innerHTML = installSteps(); help.showModal();
+});
+help.addEventListener("click", e => { if (e.target === help || e.target.closest("[data-close]")) help.close(); });
+</script>
+</body>
+</html>

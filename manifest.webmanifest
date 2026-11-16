@@ -1,0 +1,21 @@
+{
+  "name": "Dimaag Dada",
+  "short_name": "Dimaag Dada",
+  "description": "A puzzle for every day, stories and games with Dimaag Dada, Anna and Chiklu.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#151f26",
+  "theme_color": "#3c1f5c",
+  "categories": ["education", "kids", "games"],
+  "icons": [
+    {"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Daily puzzle", "url": "./#daily", "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]},
+    {"name": "Puzzle archive", "url": "./#archive", "icons": [{"src": "img/icon-192.png", "sizes": "192x192"}]}
+  ]
+}
