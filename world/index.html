@@ -1,1 +1,7 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Dimaag Dada · Play</title><meta http-equiv="refresh" content="0;url=/#play"><link rel="canonical" href="https://www.dimaagdada.com/"><meta name="robots" content="noindex"><script>location.replace("/#play")</script></head><body><p><a href="/#play">Go to Play</a></p></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Dimaag Dada · Play</title><link rel="canonical" href="https://www.dimaagdada.com/"><meta name="robots" content="noindex">
+<script>
+(function(){var h=location.hash||"",to="/#play";
+if(/#\/(club|shop)/.test(h))to="/#shop";else if(/#\/play\//.test(h))to="/#scenes";else if(/#\/read/.test(h))to="/#comics";
+if("serviceWorker"in navigator)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){if(/\/world\//.test(r.scope))r.unregister();});}).catch(function(){});
+location.replace(to);})();
+</script><noscript><meta http-equiv="refresh" content="0;url=/#play"></noscript></head><body><p><a href="/#play">Go to Play</a></p></body></html>
