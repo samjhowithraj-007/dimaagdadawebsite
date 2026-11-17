@@ -282,6 +282,10 @@ const frame = (src, title, lead) => `<h1>${title}</h1>${lead ? `<p class="lead">
 function fitFrame(){
   clearInterval(window.__gfT);
   const f = document.getElementById("gf"); if (!f) return;
+  if (/#\/(shop|club)/.test(f.getAttribute("src") || "")) {   // Shop and Community: a fixed-height window that scrolls inside, so sign-in and payment boxes always sit in view
+    const h = () => { f.style.height = Math.round(Math.max(480, Math.min(innerHeight * 0.86, 900))) + "px"; };
+    h(); window.__gfR && removeEventListener("resize", window.__gfR); window.__gfR = h; addEventListener("resize", h); return;
+  }
   const fit = () => { try { const d = f.contentDocument; if (d && d.documentElement) f.style.height = Math.max(d.documentElement.scrollHeight, d.body ? d.body.scrollHeight : 0, 520) + "px"; } catch (e) {} };
   f.addEventListener("load", fit); window.__gfT = setInterval(() => { if (!document.getElementById("gf")) clearInterval(window.__gfT); else fit(); }, 700);
 }
