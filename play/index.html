@@ -256,7 +256,7 @@ async function startPay(what, minor){
   try {
     const o = await api("/order", { items, cur });   // the server picks the products and prices, not this page
     store.set("pendingOrder", { id: o.order_id, items, what, at: Date.now() });
-    location.href = o.checkout_url;
+    (window.top || window).location.href = o.checkout_url;   // the app can sit inside an iframe on the Shop/Community pages; the Dodo page must open full window
   } catch (e) { payMsg(what, money(minor / 100), "Checkout did not open", `<p>${esc(e.message || "Check your internet and try again.")}</p><p class="note">Nothing was charged.</p>`); }
 }
 // Coming back from checkout: /play/?order=<id>. We never trust the address bar; we ask our server, which learns "paid" from Dodo's signed webhook.
