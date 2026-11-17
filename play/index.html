@@ -210,7 +210,7 @@ function tierCard(n, k, list, best){
   <button class="cta" type="button" data-pay="${(Math.round(v * 100))}" data-items="${k}:${yearly ? "y" : "m"}" data-what="${n} · ${yearly ? "yearly" : "monthly"}">Join ${n}</button></div>`;
 }
 function clubTab(){
-  return `<div class="hero" style="min-height:170px;background:linear-gradient(160deg,#2b1640,#10262a)"><img class="dada" src="img/dada-thumbs.webp" alt="Dimaag Dada giving a thumbs up" width="110" height="190" style="height:86%"><span class="eyebrow">Dada Club</span><h2>Sab games. Naye puzzles har mahine.</h2><p>Cancel any time</p></div>
+  return `<div class="hero" style="min-height:170px;background:linear-gradient(160deg,#2b1640,#10262a)"><img class="dada" src="img/dada-thumbs.webp" alt="Dimaag Dada giving a thumbs up" width="110" height="190" style="height:86%"><span class="eyebrow">Dada Club</span><h2>Every game. New puzzles every month.</h2><p>Cancel any time</p></div>
   <div class="seg" role="group" aria-label="Billing"><button type="button" data-bill="m" aria-pressed="${!yearly}">Monthly</button><button type="button" data-bill="y" aria-pressed="${yearly}">Yearly · 2 months free</button></div>
   <div class="tiers">${tierCard("Club Play", "play", ["All jigsaws + board games", "New scenes every month", "No ads"])}${tierCard("Club Pro", "pro", ["Everything in Club Play", "Dada video classes (coming soon)", "Printable workbooks (coming soon)", "10% off in the Shop"], 1)}${tierCard("Family", "fam", ["Club Pro for up to 4 kids", "Separate profiles + progress"])}</div>
   <p class="foot" style="margin-top:14px">Free plan: 3 scenes, 1 daily puzzle, 1 free Club puzzle every week.</p>${testNote()}`;
