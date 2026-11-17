@@ -169,7 +169,8 @@ const fmtP = k => val(k) == null ? "India only" : money(val(k));
 function dayKey(d){ d = d || new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
 function weekly(){ const c = SCENES.filter(s => !s.free); if (!c.length) return null; const w = Math.max(0, Math.floor((Date.now() - WEEK0) / 6048e5)); return c[w % c.length]; }
 function daily(){ const d = new Date(); return SCENES[Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) % SCENES.length]; }
-function open(s){ return s.free || club() || (weekly() && weekly().id === s.id) || daily().id === s.id; }
+const packOwned = () => (store.get("own", [])).includes("pack");
+function open(s){ return s.free || club() || packOwned() || (weekly() && weekly().id === s.id) || daily().id === s.id; }
 function fmt(s){ s = Math.floor(s); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
 function starTxt(id){ const n = stars[id] || 0; return "★".repeat(n) + "☆".repeat(3 - n); }
 function esc(t){ return String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
@@ -259,6 +260,15 @@ async function startPay(what, minor){
   } catch (e) { payMsg(what, money(minor / 100), "Checkout did not open", `<p>${esc(e.message || "Check your internet and try again.")}</p><p class="note">Nothing was charged.</p>`); }
 }
 // Coming back from checkout: /play/?order=<id>. We never trust the address bar; we ask our server, which learns "paid" from Dodo's signed webhook.
+// On every app open: re-ask the server about our paid orders. A cancelled, expired or refunded order removes its access.
+async function revalidate(){
+  if (!CONFIG.PAY_API) return; const po = store.get("paidOrders", []); if (!po.length) return; let changed = false;
+  for (const o of po) { try { const st = await api("/status", { order_id: o.id }); if (st.status === "revoked") { o.dead = true; changed = true; } } catch (e) {} }
+  if (!changed) return;
+  const live = po.filter(o => !o.dead), items = live.flatMap(o => o.items);
+  store.set("paidOrders", live); store.set("club", items.some(k => /^(play|pro|fam):/.test(k)));
+  store.set("own", ["book", "pack"].filter(k => items.includes(k))); if (!G) render();
+}
 async function checkReturn(){
   const q = new URLSearchParams(location.search), id = q.get("order");
   if (!id || !CONFIG.PAY_API || !/^do_[0-9a-f-]{36}$/.test(id)) return;
@@ -269,8 +279,8 @@ async function checkReturn(){
     let st; try { st = await api("/status", { order_id: id }); } catch (e) { st = null; }
     if (st && st.status === "paid") {
       const items = st.items || []; const own = store.get("own", []);
-      items.forEach(k => { if (k === "book" && !own.includes("book")) own.push("book"); if (k === "pack" || /^(play|pro|fam):/.test(k)) store.set("club", true); });
-      store.set("own", own); cart = cart.filter(k => !items.map(x => x.split(":")[0]).includes(k)); store.set("cart", cart); store.set("pendingOrder", null);
+      items.forEach(k => { if ((k === "book" || k === "pack") && !own.includes(k)) own.push(k); if (/^(play|pro|fam):/.test(k)) store.set("club", true); });
+      store.set("own", own); const po = store.get("paidOrders", []).filter(x => x.id !== id); po.push({ id, items }); store.set("paidOrders", po.slice(-5)); cart = cart.filter(k => !items.map(x => x.split(":")[0]).includes(k)); store.set("cart", cart); store.set("pendingOrder", null);
       payMsg(what, "", "Payment confirmed", `<p><b>Thank you!</b> Your order is confirmed.</p><p class="note">${CONFIG.SAMPLE_PRICES ? "Test mode: no real money moved." : "Keep this page's confirmation for your records."}</p>`); if (!G) render(); return; }
     if (st && st.status === "revoked") { payMsg(what, "", "Order cancelled", "<p>This order was cancelled or refunded.</p>"); return; }
     await new Promise(r => setTimeout(r, 2500));
@@ -412,7 +422,7 @@ $("cur").value = cur; $("cur").onchange = e => { cur = e.target.value; store.set
 const sb = $("snd"); sb.textContent = sound ? "🔊" : "🔇";
 sb.onclick = () => { sound = !sound; store.set("sound", sound); sb.textContent = sound ? "🔊" : "🔇"; };
 let rz = 0; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if (G && G.BW !== avail()) layout(); }, 200); });
-addEventListener("hashchange", render); render(); checkReturn();
+addEventListener("hashchange", render); render(); checkReturn(); revalidate();
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 </script>
 </body>
