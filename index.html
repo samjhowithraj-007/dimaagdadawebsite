@@ -91,6 +91,7 @@ main{min-height:100svh;padding:28px 0 56px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:14px}
 .tile{display:flex;flex-direction:column;gap:6px;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--line)}
 .item img.th{width:96px;height:72px;object-fit:cover;border-radius:10px;flex:none}.bkcard{display:flex;gap:16px;align-items:center}.bkcard img{width:120px;height:auto;border-radius:12px;flex:none}@media (max-width:520px){.bkcard{flex-direction:column;align-items:flex-start}.bkcard img{width:100%;max-height:200px;object-fit:cover}}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}.plan{position:relative;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:6px;box-shadow:var(--shadow)}.plan.best{border-color:var(--accent)}.plan h3{margin:0}.plan .pp{font:800 28px var(--disp)}.plan .pp small{font:600 14px var(--body);color:var(--muted)}.plan .ticks{flex:1;margin:6px 0 10px}.plan .btn{text-align:center;margin:0}.plan .chip2{position:absolute;top:-11px;right:14px}
 .gtile{display:flex;flex-direction:column;background:var(--card);border:2px solid var(--line);border-radius:20px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--line)}.gtile:hover{transform:translateY(-2px)}.gtile img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--bg2)}.gtile span{display:flex;flex-direction:column;gap:2px;padding:12px 14px 14px}.gtile b{font:800 18px var(--disp)}.gtile small{color:var(--muted);font-size:14px}
 .tile:hover{transform:translateY(-2px)}
 .tile img{width:72px;height:72px;border-radius:18px;background:var(--bg2)}
@@ -184,7 +185,7 @@ footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);backg
     <div class="cols">
       <div><h4>Dimaag Dada</h4><p style="margin:0;font-size:14px">A 3D cartoon grandfather with a puzzle for every day. Channel run by Raj (Samjho with Raj).</p><ul class="soc" id="foot-soc"></ul></div>
       <div><h4>Explore</h4><ul><li><a href="#daily">Daily puzzle</a></li><li><a href="#archive">Puzzle archive</a></li><li><a href="#play">Play</a></li><li><a href="#shop">Shop</a></li><li><a href="#stories">Stories</a></li><li><a href="#books">Books</a></li></ul></div>
-      <div><h4>Join Dada</h4><ul><li><a href="#channels">All channels</a></li><li><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">WhatsApp channel</a></li><li><a href="https://t.me/dimaagdada" rel="noopener">Telegram channel</a></li></ul></div>
+      <div><h4>Community</h4><ul><li><a href="#community">Community</a></li><li><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">WhatsApp channel</a></li><li><a href="https://t.me/dimaagdada" rel="noopener">Telegram channel</a></li></ul></div>
       <div><h4>Samjho with Raj</h4><ul><li><a href="https://www.techsamjhoraj.com/" rel="noopener">Tech Samjho Raj</a></li><li><a href="https://www.paisasamjhoraj.com/" rel="noopener">Paisa Samjho Raj</a></li><li><a href="#about">About</a></li><li><a href="#privacy">Privacy</a></li></ul></div>
     </div>
     <p class="fine">No ads · No tracking · <a href="#privacy">Privacy</a> · All stories and puzzles are original.</p>
@@ -294,7 +295,7 @@ const VIEWS = {
     <section class="sec"><h2>Pick your adventure</h2><div class="grid">${TILES.map(gtile).join("")}</div><p class="note">The games are on the <a href="#play">Play</a> page.</p></section>
     <section class="sec two"><div class="card"><p class="eyebrow">New every day</p><h3>Puzzle archive</h3><p>Every puzzle video, one tap away. Think first, then watch Dada's trick.</p><a class="btn" href="#archive">Open the archive</a></div>
       <div class="card"><p class="eyebrow">For exam practice</p><h3>Reasoning Samjho</h3><p>Our puzzle book: 192 puzzles that train you for school quizzes, interviews and competitive exams.</p><a class="btn" href="#books">About the book</a></div></section>
-    <section class="sec"><h2>Never miss a puzzle</h2><p>Follow Dada where you like. WhatsApp and Telegram get the same channel updates.</p><ul class="soc">${socialHtml()}</ul><a class="btn ghost" href="#channels">All channels</a></section>${signup("Get a note when a new Dada book or game is ready")}`,
+    <section class="sec"><h2>Never miss a puzzle</h2><p>Follow Dada where you like. WhatsApp and Telegram get the same channel updates.</p><ul class="soc">${socialHtml()}</ul><a class="btn ghost" href="#community">All channels</a></section>${signup("Get a note when a new Dada book or game is ready")}`,
 
   daily: () => `<h1>Daily puzzle</h1><p class="lead">One original puzzle a day. Think first, then peek.</p>${puzzleCard(dayOff)}
     <p><button class="btn ghost" type="button" data-act="prev">← Earlier puzzle</button>${dayOff < 0 ? '<button class="btn ghost" type="button" data-act="next">Later puzzle →</button><button class="btn" type="button" data-act="today">Back to today</button>' : ""}</p>
@@ -321,15 +322,26 @@ const VIEWS = {
     <div class="card sec"><h3>Meet the cast</h3><p><b>Dimaag Dada</b> is the wise grandfather in India. <b>Anna</b> (9) and <b>Chiklu</b> (7) live in the Netherlands and visit him in the holidays. All three wear round black glasses, so they can see every clue.</p><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu" width="1005" height="698" loading="lazy" style="max-width:420px;width:100%"></div>`,
 
   books: () => `<h1>Books</h1>${bookStore()}
-    <div class="card sec bkcard"><img src="play/img/comic/trail-1-cover.webp" alt="Anna and Chiklu with a treasure map" width="160" height="160" loading="lazy" style="object-fit:cover"><div><h3>Anna &amp; Chiklu's Puzzle Book</h3><p>Mazes, number puzzles and spot-the-difference for kids 7 to 12. Coming soon: follow the channels to hear first.</p><a class="btn ghost" href="#channels">Follow Dada</a></div></div>${signup("Tell me when a new book arrives")}`,
+    <div class="card sec bkcard"><img src="play/img/comic/trail-1-cover.webp" alt="Anna and Chiklu with a treasure map" width="160" height="160" loading="lazy" style="object-fit:cover"><div><h3>Anna &amp; Chiklu's Puzzle Book</h3><p>Mazes, number puzzles and spot-the-difference for kids 7 to 12. Coming soon: follow the channels to hear first.</p><a class="btn ghost" href="#community">Follow Dada</a></div></div>${signup("Tell me when a new book arrives")}`,
 
   jigsaw: () => jigsawPage(),
 
-  channels: () => `<h1>Join Dada everywhere</h1><p class="lead">Pick your favourite place. WhatsApp and Telegram bring the channel updates straight to your phone.</p>
+  community: () => `<h1>Community</h1><p class="lead">Join the Dimaag Dada family. Everything free stays free. The Dada Club gives you more puzzles and games, and you can follow Dada anywhere.</p>
+    <section class="sec"><p class="eyebrow">Join Dada World</p><h2>Dada Club plans</h2>
+    <div class="plans">
+      <div class="plan"><h3>Free</h3><div class="pp">₹0</div><ul class="ticks"><li>3 jigsaw scenes</li><li>1 daily puzzle</li><li>1 free Club puzzle every week</li><li>Ludo, chess, snakes and sums, comics</li></ul><a class="btn ghost" href="#play">Start playing</a></div>
+      <div class="plan"><h3>Club Play</h3><div class="pp">₹99 <small>/ month</small></div><p class="note">or ₹990 a year (2 months free)</p><ul class="ticks"><li>All jigsaws and board games</li><li>New scenes every month</li><li>No ads</li></ul><a class="btn" href="#club">Join Club Play</a></div>
+      <div class="plan best"><span class="chip2">Most popular</span><h3>Club Pro</h3><div class="pp">₹249 <small>/ month</small></div><p class="note">or ₹2,490 a year (2 months free)</p><ul class="ticks"><li>Everything in Club Play</li><li>Dada video classes (coming soon)</li><li>Printable workbooks (coming soon)</li><li>10% off in the Shop</li></ul><a class="btn" href="#club">Join Club Pro</a></div>
+      <div class="plan"><h3>Family</h3><div class="pp">₹399 <small>/ month</small></div><p class="note">or ₹3,990 a year (2 months free)</p><ul class="ticks"><li>Club Pro for up to 4 kids</li><li>Separate profiles and progress</li></ul><a class="btn" href="#club">Join Family</a></div>
+    </div>
+    <p class="note">Test mode: these are sample prices and no real money is taken yet. The Club page shows prices in your own currency. Payments are handled by Dodo Payments, and a grown-up confirms every purchase.</p></section>
+    <section class="sec"><p class="eyebrow">Follow and chat</p><h2>Join Dada everywhere</h2><p class="lead">Pick your favourite place. WhatsApp and Telegram bring the channel updates straight to your phone.</p>
     <ul class="soc">${socialHtml()}</ul>
     <div class="pair sec"><div class="qr"><img src="img/qr-whatsapp.png" alt="QR code for the Dimaag Dada WhatsApp channel" width="92" height="92" loading="lazy"><div><h3>WhatsApp channel</h3><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">Open the channel</a></div></div>
     <div class="qr"><img src="img/qr-telegram.png" alt="QR code for the Dimaag Dada Telegram channel" width="92" height="92" loading="lazy"><div><h3>Telegram channel</h3><a href="https://t.me/dimaagdada" rel="noopener">Open the channel</a></div></div></div>
-    <p class="note">X is shared with Samjho with Raj, so it shows all three channels.</p>`,
+    <p class="note">X is shared with Samjho with Raj, so it shows all three channels.</p></section>${signup("Get a note when something new arrives")}`,
+
+  club: () => frame("play/?embed=1#/club", "Dada Club", "Pick a plan. A grown-up confirms every purchase, and you can see the free plan below."),
 
   about: () => `<div class="prose"><h1>About Dimaag Dada</h1>
     <p>Dimaag Dada (“Dada” means grandfather) is a 3D cartoon grandfather who loves puzzles. His motto: <b>“Wait! Think first, then speak.”</b></p>
@@ -343,16 +355,17 @@ const VIEWS = {
     <h2>Email sign-up</h2><p>If you use the email sign-up box, you are only asked for an email address, you choose to give it, it is stored with our email service (Brevo), you confirm it by clicking a link in an email, and every email has an unsubscribe link. Brevo may count whether emails are opened or clicked. To have your address deleted, write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.</p>
     <h2>Children</h2><p>Dada is made for families. We do not ask children for any personal details.</p></div>`
 };
-const TITLES = { jigsaw:"Free online jigsaw · Dimaag Dada", home:"Dimaag Dada · Think first, then speak", daily:"Daily puzzle · Dimaag Dada", archive:"Puzzle archive · Dimaag Dada", play:"Play · Dimaag Dada", scenes:"Jigsaw scenes · Dimaag Dada", snakes:"Snakes & Sums · Dimaag Dada", ludo:"Dada Ludo · Dimaag Dada", chess:"Botu Chess · Dimaag Dada", comics:"Dada Comics · Dimaag Dada", shop:"Shop and Club · Dimaag Dada", stories:"Stories · Dimaag Dada", books:"Books · Dimaag Dada", channels:"Join Dada · Dimaag Dada", about:"About · Dimaag Dada", privacy:"Privacy · Dimaag Dada" };
-const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["play","Play"],["stories","Stories"],["books","Books"],["shop","Shop"],["channels","Join"],["about","About"]];
+const TITLES = { jigsaw:"Free online jigsaw · Dimaag Dada", home:"Dimaag Dada · Think first, then speak", daily:"Daily puzzle · Dimaag Dada", archive:"Puzzle archive · Dimaag Dada", play:"Play · Dimaag Dada", scenes:"Jigsaw scenes · Dimaag Dada", snakes:"Snakes & Sums · Dimaag Dada", ludo:"Dada Ludo · Dimaag Dada", chess:"Botu Chess · Dimaag Dada", comics:"Dada Comics · Dimaag Dada", shop:"Shop and Club · Dimaag Dada", stories:"Stories · Dimaag Dada", books:"Books · Dimaag Dada", community:"Community · Dimaag Dada", club:"Dada Club · Dimaag Dada", about:"About · Dimaag Dada", privacy:"Privacy · Dimaag Dada" };
+const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["play","Play"],["stories","Stories"],["books","Books"],["shop","Shop"],["community","Community"],["about","About"]];
 
 const app = document.getElementById("app");
 function render(){
   let r = (location.hash || "#home").slice(1).split("?")[0];
+  if (r === "channels") r = "community";
   if (!VIEWS[r]) r = "home";
   app.innerHTML = VIEWS[r]();
   document.title = TITLES[r];
-  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r))) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
+  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r)) || (k === "community" && r === "club")) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   window.scrollTo(0, 0);
   document.getElementById("main").focus({ preventScroll: true });
   if (r === "jigsaw") setTimeout(() => startJigsaw());
@@ -564,11 +577,12 @@ const DADA = {
     [["video","videos","watch","youtube","short","shorts","archive","story","stories","long"], () => ({ text: 'Every puzzle video is in the <a href="#archive">archive</a>, and the cartoon adventures are in <a href="#stories">Stories</a>. Or go straight to <a href="' + YT + '" rel="noopener">YouTube</a>.', chips: ["Join channels"] })],
     [["game","games","play","ludo","chess","jigsaw","puzzle game","snakes","comic","comics","world","shop"], () => ({ text: 'Play the <a href="#jigsaw">free jigsaw</a> or see everything on the <a href="#play">Play</a> page: snakes and sums, ludo, chess and comics. Books and the Dada Club are in the <a href="#shop">Shop</a>.', chips: ["Today's puzzle"] })],
     [["book","books","reasoning","buy","selection"], () => ({ text: 'The puzzle book is <b>Reasoning Samjho: Puzzle se Selection tak</b>, with 192 puzzles. See <a href="#books">Books</a>.', chips: ["Join channels"] })],
-    [["whatsapp","telegram","channel","channels","join","follow","instagram","facebook","insta"], () => ({ text: 'Follow Dada on <a href="' + YT + '" rel="noopener">YouTube</a>, Instagram and Facebook. WhatsApp and Telegram work as a pair: all links and QR codes are on the <a href="#channels">Join page</a>.' })],
+    [["club","plan","plans","membership","subscription","price","prices"], () => ({ text: 'The <b>Dada Club</b> has plans from ₹99 a month (test-mode sample prices): more jigsaws and games, new scenes every month, and a family plan. See the <a href="#community">Community page</a> to compare and join. The free plan keeps 3 scenes and the daily puzzle.' })],
+    [["whatsapp","telegram","channel","channels","join","follow","instagram","facebook","insta"], () => ({ text: 'Follow Dada on <a href="' + YT + '" rel="noopener">YouTube</a>, Instagram and Facebook. WhatsApp and Telegram work as a pair: all links and QR codes are on the <a href="#community">Community page</a>.' })],
     [["install","app","download","phone"], () => ({ text: 'Tap the <b>Install app</b> button at the top of the page. It adds Dimaag Dada to your home screen and works offline.' })],
     [["anna","chiklu","cast","who","dada","grandfather","glasses"], () => ({ text: 'Dimaag Dada is the wise grandfather. <b>Anna</b> (9) and <b>Chiklu</b> (7) are his grandchildren from the Netherlands. All three wear round black glasses! Read more on <a href="#about">About</a>.' })],
     [["exam","exams","competitive","school","quiz","interview","selection"], () => ({ text: "Dada's puzzles train careful thinking for school quizzes, interviews and competitive exams. Start with <a href=\"#daily\">today's puzzle</a>.", chips: ["Today's puzzle"] })],
-    [["email","newsletter","notify","subscribe","signup","sign"], () => ({ text: 'Use the sign-up box on the <a href="#home">home page</a> or <a href="#books">Books page</a>, or follow the <a href="#channels">channels</a>.' })],
+    [["email","newsletter","notify","subscribe","signup","sign"], () => ({ text: 'Use the sign-up box on the <a href="#home">home page</a> or <a href="#books">Books page</a>, or follow the <a href="#community">channels</a>.' })],
     [["contact","write","mail","help"], () => ({ text: 'Write to <a href="mailto:samjhowithraj@gmail.com">samjhowithraj@gmail.com</a>.' })],
     [["privacy","tracking","cookies","data"], () => ({ text: 'No account, no ads, no tracking. Details on the <a href="#privacy">Privacy page</a>.' })],
     [["hello","hi","hey","namaste","hii"], () => ({ text: DADA.hello, chips: DADA.chips })],
