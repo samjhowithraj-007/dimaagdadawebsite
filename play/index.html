@@ -237,7 +237,9 @@ function testNote(){ return CONFIG.SAMPLE_PRICES ? `<p class="note">Test mode: p
 function footer(){ return `<p class="foot"><a href="terms.html">Terms</a> · <a href="refund.html">Refunds</a> · <a href="shipping.html">Shipping</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a><br>Part of <a href="../">dimaagdada.com</a> · Made by Raj · <a href="https://www.youtube.com/@DimaagDada" target="_blank" rel="noopener">Dimaag Dada on YouTube</a> · No ads, no tracking</p>`; }
 
 // ---- checkout: parent gate, then Dodo Payments hosted checkout (TEST mode). Access is unlocked only from the server's /status answer. ----
-function sheet(html){ const s = $("sheet"); s.innerHTML = html; s.hidden = false; const x = $("sx"); if (x) x.onclick = () => s.hidden = true; }
+function sheet(html){ const s = $("sheet"); s.innerHTML = html; s.hidden = false;
+  s.style.inset = "";   // inside the Shop/Community iframe the frame is very tall: keep the sheet in the part of the frame the visitor can actually see
+  if (window.frameElement) { try { const fr = frameElement.getBoundingClientRect(), vh = parent.innerHeight, top = Math.max(0, -fr.top), bottom = Math.min(fr.height, vh - fr.top); s.style.inset = top + "px 0 " + Math.max(0, fr.height - bottom) + "px 0"; } catch (e) {} } const x = $("sx"); if (x) x.onclick = () => s.hidden = true; }
 const head = (what, amount) => `<div class="head"><img src="img/dada3d-96.webp" alt="" width="36" height="36"><div><h3>Dimaag Dada</h3><small style="color:#6b7686;font-size:12px">${esc(what)}</small></div><span class="amt">${amount}</span><button class="x" type="button" id="sx" aria-label="Close">×</button></div>`;
 function parentGate(what, minor){
   const a = 2 + Math.floor(Math.random() * 8), b = 3 + Math.floor(Math.random() * 7);
