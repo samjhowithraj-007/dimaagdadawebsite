@@ -117,11 +117,10 @@ main{max-width:1000px;margin:0 auto;padding:16px 16px 110px}
 <div class="cheer" id="cheer" aria-live="polite"><img src="img/dada-thumbs.webp" alt=""><span id="cheert">Shabaash!</span></div>
 <div class="sheet" id="sheet" hidden></div>
 <script>
-// Dimaag Dada (Tech Samjho Raj). Phase 1, 5 Nov 2026: Play (jigsaws, daily puzzle, streak), Club, Learn, Shop, 5 currencies, Razorpay Checkout in TEST MODE.
+// Dimaag Dada (Tech Samjho Raj). Phase 1, 5 Nov 2026: Play (jigsaws, daily puzzle, streak), Club, Learn, Shop, 5 currencies, Dodo Payments checkout in TEST MODE.
 // Add a scene: put scenes/<id>.webp (about 1536x1050) and scenes/<id>-sm.webp (480 wide) in place, add a line to SCENES, bump sw.js VERSION.
 const CONFIG = {
-  RZP_KEY: "rzp_test_TwyZf7SbbV7hkU",   // Razorpay TEST key id only (rzp_test_...). Empty = checkout shows "payments open soon". NEVER put a live key or any secret here.
-  PAY_API: "https://dada-pay.techsamjhoraj.workers.dev",   // payments-check worker URL (https://dada-pay.<name>.workers.dev). Empty = browser-only test mode, nothing is verified.
+  PAY_API: "https://dada-pay.techsamjhoraj.workers.dev",   // payments worker (Dodo Payments, TEST mode). Empty = checkout shows "payments open soon". No keys or secrets in this file.
   WHATSAPP: "https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28",
   SAMPLE_PRICES: true   // the prices below are samples until Raj sets real ones; the test-mode banner shows while this is true
 };
@@ -149,10 +148,10 @@ const PRICE = {
 const SYM = { INR: "₹", USD: "$", EUR: "€", GBP: "£", AED: "AED " };
 const PRODUCTS = [
   { k: "pack", cat: "Digital", img: "img/ludo.webp", imgS: "scenes/mystery-house-sm.webp", t: "Club scene pack", s: "5 jigsaws · digital", badge: "new" },
-  { k: "book", cat: "Books", img: "img/puzzle-book.webp", t: "Dada Puzzle Book 1", s: "100 puzzles · print + PDF", was: 1 },
+  { k: "book", cat: "Books", img: "img/puzzle-book.webp", t: "Dada Puzzle Book 1", s: "100 brain-training puzzles · PDF (printed copy coming soon)", was: 1 },
   { k: "comic", cat: "Comics", img: "img/comics-trail.webp", t: "Dada Comics #1 · free to read in the app", s: "The Puzzle Trail · Anna & Chiklu", badge: "new", free: "comics.html" },
   { k: "book2", cat: "Books", img: "img/comic/trail-1-cover.webp", t: "Anna &amp; Chiklu's Puzzle Book", s: "Puzzles for kids 7–12 · coming soon", badge: "soon", soon: 1 },
-  { k: "pencil", cat: "Stationery", img: "img/stationery.webp", t: "Dada pencil set", s: "Ships in India only" }
+  { k: "pencil", cat: "Stationery", img: "img/stationery.webp", t: "Dada pencil set", s: "Printed items · coming soon", badge: "soon", soon: 1 }
 ];
 const app = document.getElementById("app");
 const $ = id => document.getElementById(id);
@@ -226,7 +225,7 @@ function shopTab(){
   const cats = ["All", "Digital", "Books", "Comics", "Stationery", "Games"], inCart = k => cart.includes(k);
   const list = PRODUCTS.filter(p => shopCat === "All" || p.cat === shopCat);
   const items = cart.filter(k => val(k) != null && !PRODUCTS.find(p => p.k === k).free), total = items.reduce((a, k) => a + val(k), 0);
-  return `<div class="hero" style="min-height:200px"><img class="bg" src="img/puzzle-book.webp" alt="" style="opacity:.85"><span class="eyebrow">Dada Shop · launch offer</span><h2>Puzzle Book 1 is here</h2><p>100 puzzles · print + PDF</p>${val("book") == null ? "" : `<button class="cta" type="button" data-buynow="book">Buy ${fmtP("book")}</button>`}</div>
+  return `<div class="hero" style="min-height:200px"><img class="bg" src="img/puzzle-book.webp" alt="" style="opacity:.85"><span class="eyebrow">Dada Shop · launch offer</span><h2>Puzzle Book 1 is here</h2><p>100 brain-training puzzles · PDF</p>${val("book") == null ? "" : `<button class="cta" type="button" data-buynow="book">Buy ${fmtP("book")}</button>`}</div>
   <div class="chips" role="group" aria-label="Category">${cats.map(c => `<button class="chip" type="button" data-cat="${c}" aria-pressed="${c === shopCat}">${c}</button>`).join("")}</div>
   <div class="prods">${list.length ? list.map(p => `<div class="prod"><div class="thumb"><img src="${p.imgS || p.img}" alt="" loading="lazy" width="480" height="360" style="aspect-ratio:${p.k === "comic" ? "3/4" : "4/3"}">${p.badge ? BADGE[p.badge === "new" ? "neu" : p.badge] : ""}</div><b>${p.t}</b><small>${p.s}</small>
     <div class="row">${p.soon ? `<span class="price">Soon</span><a class="cta" style="padding:7px 12px;font-size:13px" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Notify me</a>` : p.free ? `<span class="price">Free</span><a class="cta" style="padding:7px 12px;font-size:13px" href="${p.free}">Read now</a>` : `<span class="price">${fmtP(p.k)}${p.was && val(p.k) != null ? `<span class="was">${money(val(p.k) * 1.3)}</span>` : ""}</span>${val(p.k) == null ? '<small>Coming abroad</small>' : `<button class="add" type="button" data-add="${p.k}" aria-pressed="${inCart(p.k)}" aria-label="${inCart(p.k) ? "Remove" : "Add"} ${p.t}">${inCart(p.k) ? "✓" : "+"}</button>`}`}</div></div>`).join("") : '<p class="note">Board games are coming soon.</p>'}</div>
@@ -235,7 +234,7 @@ function shopTab(){
 function testNote(){ return CONFIG.SAMPLE_PRICES ? `<p class="note">Test mode: prices are samples and no real money is taken yet.</p>` : ""; }
 function footer(){ return `<p class="foot"><a href="terms.html">Terms</a> · <a href="refund.html">Refunds</a> · <a href="shipping.html">Shipping</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a><br>Part of <a href="../">dimaagdada.com</a> · Made by Raj · <a href="https://www.youtube.com/@DimaagDada" target="_blank" rel="noopener">Dimaag Dada on YouTube</a> · No ads, no tracking</p>`; }
 
-// ---- checkout: parent gate, then Razorpay Checkout (TEST key only) ----
+// ---- checkout: parent gate, then Dodo Payments hosted checkout (TEST mode). Access is unlocked only from the server's /status answer. ----
 function sheet(html){ const s = $("sheet"); s.innerHTML = html; s.hidden = false; const x = $("sx"); if (x) x.onclick = () => s.hidden = true; }
 const head = (what, amount) => `<div class="head"><img src="img/dada3d-96.webp" alt="" width="36" height="36"><div><h3>Dimaag Dada</h3><small style="color:#6b7686;font-size:12px">${esc(what)}</small></div><span class="amt">${amount}</span><button class="x" type="button" id="sx" aria-label="Close">×</button></div>`;
 function parentGate(what, minor){
@@ -246,35 +245,37 @@ function parentGate(what, minor){
     if (+v !== a * b) { $("gateerr").textContent = "Not quite. Ask a grown-up to help."; return; }
     startPay(what, minor); };
 }
-function loadRzp(){ return new Promise((res, rej) => { if (window.Razorpay) return res(); const s = document.createElement("script"); s.src = "https://checkout.razorpay.com/v1/checkout.js"; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
-let failed = null, payItems = [];
-function rzpOptions(what, minor){
-  const o = { key: CONFIG.RZP_KEY, amount: minor, currency: cur, name: "Dimaag Dada", description: what, image: new URL("img/dada3d-192.png", location.href).href,
-    theme: { color: "#19e6e6" }, modal: { ondismiss: () => { const f = failed; failed = null; sheet(`<div class="pay" role="dialog">${head(f ? "Payment did not go through" : "Payment cancelled", money(minor / 100))}<p><b>${f ? "Nothing was charged." : "No money moved."}</b> ${f ? esc(f) + " Try again or use another method." : "You can try again any time."}</p>${/^rzp_test_/.test(CONFIG.RZP_KEY) ? `<p class="note">Test mode: no real money is taken yet.</p>` : ""}<button class="go" type="button" id="sx2">Back to Dimaag Dada</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; } },
-    handler: r => { failed = null; sheet(`<div class="pay" role="dialog">${head("Payment received", money(minor / 100))}<p><b>Thank you!</b> Test payment id: ${esc(r.razorpay_payment_id || "")}</p><p>This is test mode, so nothing is unlocked and no money moved. Real orders will be checked on our server first.</p><button class="go" type="button" id="sx2">Back to Dimaag Dada</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; } };
-  if (cur === "INR") o.config = { display: { blocks: { upi: { name: "Pay with UPI", instruments: [{ method: "upi" }] } }, sequence: ["block.upi"], preferences: { show_default_blocks: true } } };   // UPI first for India
-  return o;   // other currencies: cards (and PayPal, once switched on in the Razorpay dashboard) are shown by Checkout itself
-}
+let payItems = [];
 async function api(path, body){ const r = await fetch(CONFIG.PAY_API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || "server error"); return j; }
 function payMsg(what, amt, title, html){ sheet(`<div class="pay" role="dialog">${head(title, amt)}${html}<button class="go" type="button" id="sx2">Back to Dimaag Dada</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; }
-async function payVerified(what, minor){
+async function startPay(what, minor){
+  if (!CONFIG.PAY_API) { sheet(`<div class="pay" role="dialog">${head(what, money(minor / 100))}<p class="tm">TEST MODE · NOT CONNECTED</p><p><b>Payments open soon.</b> Dimaag Dada is still being built, and no money is taken yet. Join the WhatsApp channel to hear when it opens.</p><a class="go" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Tell me when it opens (WhatsApp)</a><button class="go alt" type="button" id="sx2">Close</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; return; }
   const items = payItems.slice();
+  payMsg(what, money(minor / 100), "Opening secure checkout…", "<p>One moment. You will go to our payment partner, Dodo Payments, and come back here after paying.</p>");
   try {
-    await loadRzp();
-    const o = await api("/order", { items, cur });   // the server sets the price, not this page
-    const opt = rzpOptions(what, o.amount); opt.key = o.key; opt.order_id = o.order_id; opt.amount = o.amount; opt.currency = o.currency;
-    opt.handler = async r => { failed = null; payMsg(what, money(o.amount / 100), "Checking payment…", "<p>One moment, we are confirming with Razorpay.</p>");
-      try { const v = await api("/verify", { order_id: r.razorpay_order_id, payment_id: r.razorpay_payment_id, signature: r.razorpay_signature });
-        cart = cart.filter(k => !items.includes(k)); store.set("cart", cart); if (!G) render(); payMsg(what, money(o.amount / 100), "Payment confirmed", `<p><b>Thank you!</b> Payment id: ${esc(v.payment_id)}</p><p>Keep this id. ${/^rzp_test_/.test(o.key) ? "This is test mode, so no money moved." : "Your order is on its way."}</p>`);
-      } catch (e) { payMsg(what, money(o.amount / 100), "Could not confirm payment", `<p>If money left your account, write to us with id ${esc(r.razorpay_payment_id)} and we will fix it.</p><p><a href="contact.html">Contact</a></p>`); } };
-    $("sheet").hidden = true; const rz = new window.Razorpay(opt); rz.on("payment.failed", e => { failed = (e && e.error && e.error.description) || "The bank declined it."; }); rz.open();
-  } catch (e) { payMsg(what, money(minor / 100), "Payment window did not open", `<p>${esc(e.message || "Check your internet and try again.")}</p>`); }
+    const o = await api("/order", { items, cur });   // the server picks the products and prices, not this page
+    store.set("pendingOrder", { id: o.order_id, items, what, at: Date.now() });
+    location.href = o.checkout_url;
+  } catch (e) { payMsg(what, money(minor / 100), "Checkout did not open", `<p>${esc(e.message || "Check your internet and try again.")}</p><p class="note">Nothing was charged.</p>`); }
 }
-function startPay(what, minor){ failed = null;
-  if (!CONFIG.RZP_KEY) { sheet(`<div class="pay" role="dialog">${head(what, money(minor / 100))}<p class="tm">TEST MODE · NOT CONNECTED</p><p><b>Payments open soon.</b> Dimaag Dada is still being built, and no money is taken yet. Join the WhatsApp channel to hear when it opens.</p><a class="go" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Tell me when it opens (WhatsApp)</a><button class="go alt" type="button" id="sx2">Close</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; return; }
-  if (CONFIG.PAY_API) return payVerified(what, minor);
-  loadRzp().then(() => { $("sheet").hidden = true; const rz = new window.Razorpay(rzpOptions(what, minor)); rz.on("payment.failed", e => { failed = (e && e.error && e.error.description) || "The bank declined it."; }); rz.open(); })
-    .catch(() => sheet(`<div class="pay" role="dialog">${head(what, money(minor / 100))}<p>Could not load the payment window. Check your internet and try again.</p><button class="go alt" type="button" id="sx2">Close</button></div>`));
+// Coming back from checkout: /play/?order=<id>. We never trust the address bar; we ask our server, which learns "paid" from Dodo's signed webhook.
+async function checkReturn(){
+  const q = new URLSearchParams(location.search), id = q.get("order");
+  if (!id || !CONFIG.PAY_API || !/^do_[0-9a-f-]{36}$/.test(id)) return;
+  history.replaceState(null, "", location.pathname + location.hash);
+  const pend = store.get("pendingOrder", null), what = (pend && pend.id === id && pend.what) || "Your order";
+  payMsg(what, "", "Checking your payment…", "<p>One moment, we are confirming with our server.</p>");
+  for (let n = 0; n < 12; n++) {
+    let st; try { st = await api("/status", { order_id: id }); } catch (e) { st = null; }
+    if (st && st.status === "paid") {
+      const items = st.items || []; const own = store.get("own", []);
+      items.forEach(k => { if (k === "book" && !own.includes("book")) own.push("book"); if (k === "pack" || /^(play|pro|fam):/.test(k)) store.set("club", true); });
+      store.set("own", own); cart = cart.filter(k => !items.map(x => x.split(":")[0]).includes(k)); store.set("cart", cart); store.set("pendingOrder", null);
+      payMsg(what, "", "Payment confirmed", `<p><b>Thank you!</b> Your order is confirmed.</p><p class="note">${CONFIG.SAMPLE_PRICES ? "Test mode: no real money moved." : "Keep this page's confirmation for your records."}</p>`); if (!G) render(); return; }
+    if (st && st.status === "revoked") { payMsg(what, "", "Order cancelled", "<p>This order was cancelled or refunded.</p>"); return; }
+    await new Promise(r => setTimeout(r, 2500));
+  }
+  payMsg(what, "", "Still waiting for the bank", `<p>We have not heard back yet. If money left your account, it will show here soon; write to us if it does not.</p><p><a href="contact.html">Contact</a></p>`);
 }
 
 function playPage(s){
@@ -411,7 +412,7 @@ $("cur").value = cur; $("cur").onchange = e => { cur = e.target.value; store.set
 const sb = $("snd"); sb.textContent = sound ? "🔊" : "🔇";
 sb.onclick = () => { sound = !sound; store.set("sound", sound); sb.textContent = sound ? "🔊" : "🔇"; };
 let rz = 0; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if (G && G.BW !== avail()) layout(); }, 200); });
-addEventListener("hashchange", render); render();
+addEventListener("hashchange", render); render(); checkReturn();
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 </script>
 </body>
