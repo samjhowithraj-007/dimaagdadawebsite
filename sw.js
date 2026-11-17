@@ -1,10 +1,10 @@
 // Offline support for Dimaag Dada. Bump VERSION on any change to this file, index.html or the precache list.
-const VERSION = "v13";
+const VERSION = "v14";
 const CACHE = "dimaagdada-" + VERSION;
 const PRECACHE = ["./", "index.html", "manifest.webmanifest", "img/icon-192.png", "img/icon-512.png", "img/apple-touch-icon.png", "img/hero.webp", "img/mark.webp"];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith("dimaagdada-") && k !== CACHE).map(k => caches.delete(k))))
