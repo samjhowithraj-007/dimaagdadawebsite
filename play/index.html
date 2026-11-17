@@ -401,7 +401,11 @@ function render(){
     if (!s) { location.hash = "#/"; return; } if (!open(s)) { location.hash = "#/club"; return; }
     document.title = s.title + " · Dimaag Dada"; app.innerHTML = playPage(s); setTab("play"); startGame(s, store.get("lv", 0)); }
   else if (a === "read") { document.title = "Read & Watch · Dimaag Dada"; app.innerHTML = readTab() + footer(); setTab("read"); }
-  else if (a === "club" || a === "shop") { document.title = "Club & Shop · Dimaag Dada"; app.innerHTML = clubTab() + '<div class="sec" id="shop"><h3>Dada Shop</h3><span>Books · digital · stationery</span></div>' + shopTab() + footer(); setTab("club"); }
+  else if (a === "club" || a === "shop") { const emb = document.documentElement.classList.contains("embed");
+    if (emb && a === "club") { document.title = "Dada Club · Dimaag Dada"; app.innerHTML = clubTab() + footer(); }
+    else if (emb && a === "shop") { document.title = "Dada Shop · Dimaag Dada"; app.innerHTML = '<div class="sec" id="shop"><h3>Dada Shop</h3><span>Books · digital · stationery</span></div>' + shopTab() + footer(); }
+    else { document.title = "Club & Shop · Dimaag Dada"; app.innerHTML = clubTab() + '<div class="sec" id="shop"><h3>Dada Shop</h3><span>Books · digital · stationery</span></div>' + shopTab() + footer(); }
+    setTab("club"); }
   else { if (a === "learn") { location.hash = "#/"; return; } document.title = "Dimaag Dada · Play, Read, Club"; app.innerHTML = playTab() + footer(); setTab("play"); }
   $("cur").style.display = (a === "club" || a === "shop") ? "" : "none";
   scrollTo(0, 0);

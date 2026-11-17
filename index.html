@@ -327,21 +327,13 @@ const VIEWS = {
   jigsaw: () => jigsawPage(),
 
   community: () => `<h1>Community</h1><p class="lead">Join the Dimaag Dada family. Everything free stays free. The Dada Club gives you more puzzles and games, and you can follow Dada anywhere.</p>
-    <section class="sec"><p class="eyebrow">Join Dada World</p><h2>Dada Club plans</h2>
-    <div class="plans">
-      <div class="plan"><h3>Free</h3><div class="pp">₹0</div><ul class="ticks"><li>3 jigsaw scenes</li><li>1 daily puzzle</li><li>1 free Club puzzle every week</li><li>Ludo, chess, snakes and sums, comics</li></ul><a class="btn ghost" href="#play">Start playing</a></div>
-      <div class="plan"><h3>Club Play</h3><div class="pp">₹99 <small>/ month</small></div><p class="note">or ₹990 a year (2 months free)</p><ul class="ticks"><li>All jigsaws and board games</li><li>New scenes every month</li><li>No ads</li></ul><a class="btn" href="#club">Join Club Play</a></div>
-      <div class="plan best"><span class="chip2">Most popular</span><h3>Club Pro</h3><div class="pp">₹249 <small>/ month</small></div><p class="note">or ₹2,490 a year (2 months free)</p><ul class="ticks"><li>Everything in Club Play</li><li>Dada video classes (coming soon)</li><li>Printable workbooks (coming soon)</li><li>10% off in the Shop</li></ul><a class="btn" href="#club">Join Club Pro</a></div>
-      <div class="plan"><h3>Family</h3><div class="pp">₹399 <small>/ month</small></div><p class="note">or ₹3,990 a year (2 months free)</p><ul class="ticks"><li>Club Pro for up to 4 kids</li><li>Separate profiles and progress</li></ul><a class="btn" href="#club">Join Family</a></div>
-    </div>
-    <p class="note">Test mode: these are sample prices and no real money is taken yet. The Club page shows prices in your own currency. Payments are handled by Dodo Payments, and a grown-up confirms every purchase.</p></section>
+    <section class="sec"><p class="eyebrow">Join Dada World</p><h2>Dada Club plans</h2><p class="note">The free plan keeps 3 jigsaw scenes, the daily puzzle and one free Club puzzle every week. A grown-up confirms every purchase.</p>
+    <iframe class="gf" id="gf" src="play/?embed=1#/club" title="Dada Club plans"></iframe></section>
     <section class="sec"><p class="eyebrow">Follow and chat</p><h2>Join Dada everywhere</h2><p class="lead">Pick your favourite place. WhatsApp and Telegram bring the channel updates straight to your phone.</p>
     <ul class="soc">${socialHtml()}</ul>
     <div class="pair sec"><div class="qr"><img src="img/qr-whatsapp.png" alt="QR code for the Dimaag Dada WhatsApp channel" width="92" height="92" loading="lazy"><div><h3>WhatsApp channel</h3><a href="https://whatsapp.com/channel/0029VbE8BVH9RZAONaXhOl28" rel="noopener">Open the channel</a></div></div>
     <div class="qr"><img src="img/qr-telegram.png" alt="QR code for the Dimaag Dada Telegram channel" width="92" height="92" loading="lazy"><div><h3>Telegram channel</h3><a href="https://t.me/dimaagdada" rel="noopener">Open the channel</a></div></div></div>
     <p class="note">X is shared with Samjho with Raj, so it shows all three channels.</p></section>${signup("Get a note when something new arrives")}`,
-
-  club: () => frame("play/?embed=1#/club", "Dada Club", "Pick a plan. A grown-up confirms every purchase, and you can see the free plan below."),
 
   about: () => `<div class="prose"><h1>About Dimaag Dada</h1>
     <p>Dimaag Dada (“Dada” means grandfather) is a 3D cartoon grandfather who loves puzzles. His motto: <b>“Wait! Think first, then speak.”</b></p>
@@ -361,11 +353,11 @@ const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["pl
 const app = document.getElementById("app");
 function render(){
   let r = (location.hash || "#home").slice(1).split("?")[0];
-  if (r === "channels") r = "community";
+  if (r === "channels" || r === "club") r = "community";
   if (!VIEWS[r]) r = "home";
   app.innerHTML = VIEWS[r]();
   document.title = TITLES[r];
-  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r)) || (k === "community" && r === "club")) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
+  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r))) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   window.scrollTo(0, 0);
   document.getElementById("main").focus({ preventScroll: true });
   if (r === "jigsaw") setTimeout(() => startJigsaw());
