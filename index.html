@@ -403,11 +403,9 @@ document.getElementById("theme").addEventListener("click", () => {
 });
 const BOOKP = {
   title: "Reasoning Samjho", sub: "Puzzle se Selection tak",
-  price: 299, launch: 275, bundle: 399, bundleLaunch: 367,
+  price: 299, launch: 275,
   launchCode: "DADA", launchEnds: "2026-11-30T19:00:00+05:30", launchEndsLabel: "30 Nov", codeLive: true,
-  buy: { en: "https://samjhowithraj.gumroad.com/l/reasoning-samjho-en",
-         hi: "https://samjhowithraj.gumroad.com/l/reasoning-samjho-hinglish",
-         both: "https://samjhowithraj.gumroad.com/l/reasoning-samjho-both" }
+  buy: { en: "https://samjhowithraj.gumroad.com/l/reasoning-samjho-en" }
 };
 BOOKP.launchOn = BOOKP.codeLive && Date.now() < Date.parse(BOOKP.launchEnds);
 function pzBuy(key, label, price){
@@ -416,19 +414,19 @@ function pzBuy(key, label, price){
 }
 function bookStore(){
   const Z = BOOKP, now = Z.launchOn ? Z.launch : Z.price;
-  const pr = Z.launchOn ? `<s>₹${Z.price}</s> <b>₹${Z.launch}</b> <span class="chip2">Launch offer · ends ${Z.launchEndsLabel}</span><div class="both">Both editions: <s>₹${Z.bundle}</s> <b>₹${Z.bundleLaunch}</b></div>`
-                        : `<b>₹${Z.price}</b><div class="both">Both editions: <b>₹${Z.bundle}</b></div>`;
+  const pr = Z.launchOn ? `<s>₹${Z.price}</s> <b>₹${Z.launch}</b> <span class="chip2">Launch offer · ends ${Z.launchEndsLabel}</span>`
+                        : `<b>₹${Z.price}</b>`;
   return `<section class="bookhero"><img class="cov" src="img/puzzles-cover-en.jpg" alt="Reasoning Samjho book cover: Dimaag Dada at a green chalkboard" width="420" height="596">
     <div><p class="eyebrow">Dimaag Dada · Puzzle book</p><h2>${Z.title}: ${Z.sub}</h2>
       <p class="lead">Reasoning for competitive exams, taught by Dimaag Dada in his tuition class: draw it, place the surest clue first, and let the paper think for you.</p>
-      <ul class="ticks"><li>192 original reasoning puzzles, from easy to hard</li><li>Good practice for school quizzes, interviews and competitive exams</li><li>3 mock tests; every answer checked</li><li>Two editions: <b>English</b> and <b>Hinglish</b>, PDF + EPUB</li></ul>
+      <ul class="ticks"><li>192 original reasoning puzzles, from easy to hard</li><li>Good practice for school quizzes, interviews and competitive exams</li><li>3 mock tests; every answer checked</li><li>English edition, PDF + EPUB</li></ul>
       <p class="note">by <b>Raj</b></p>
       <div class="pricebox"><img class="mascot" src="img/dada-3d.webp" alt="Dimaag Dada giving a thumbs up" width="96" height="166"><div class="price">${pr}</div>
-        <div class="buyrow">${pzBuy("en", "English edition", now)}${pzBuy("hi", "Hinglish edition", now)}${pzBuy("both", "Both editions", Z.launchOn ? Z.bundleLaunch : Z.bundle)}</div>
+        <div class="buyrow">${pzBuy("en", "Buy the book", now)}</div>
         <p class="note" style="margin:8px 0 0">Instant PDF + EPUB download after payment. Checkout is on Gumroad.</p></div></div></section>
   <section class="sec"><p class="eyebrow">Free preview</p><h2>Chapter 1: Seating Arrangement</h2>
     <p class="lead">The chapter's title page, Dada's class story and a peek at what's inside. Every competitive exam paper has a seating set.</p>
-    <div class="pgrid"><div class="pcard"><b>Chapter 1</b><span>Seating Arrangement</span><div><a href="notes/puzzles-1-en-preview.pdf" target="_blank" rel="noopener">English</a> · <a href="notes/puzzles-1-hi-preview.pdf" target="_blank" rel="noopener">Hinglish</a></div></div></div></section>`;
+    <div class="pgrid"><div class="pcard"><b>Chapter 1</b><span>Seating Arrangement</span><div><a href="notes/puzzles-1-en-preview.pdf" target="_blank" rel="noopener">Read the free chapter (PDF)</a></div></div></div></section>`;
 }
 // ---------- Dimaag Dada jigsaw (5 Nov 2026): drag pieces from the tray; a piece clicks in when it is in the right place ----------
 const JIGSAW = { img: "img/jigsaw/mystery-house.webp", w: 1533, h: 1050, title: "Dimaag Dada's Mystery House",
