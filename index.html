@@ -718,8 +718,11 @@ function openCart(note){
   if (!keys.length) h += '<p>Your cart is empty.</p><div class="row2"><a class="btn" href="#books" id="ctgo">See the book</a><a class="btn ghost" href="#shop" id="ctgo2">Open the shop</a></div>';
   else {
     h += keys.map((k) => '<div class="line"><div><b>' + eh(cat[k].name) + "</b><small>" + eh(cat[k].sub) + (cat[k].dodo ? "" : " · card checkout opens soon") + '</small></div><div><b>' + rs(cat[k].price) + '</b> <button class="ib" style="color:var(--ink);border-color:var(--line);width:30px;height:30px;font-size:15px" type="button" data-drop="' + k + '" aria-label="Remove ' + eh(cat[k].name) + '">×</button></div></div>').join("");
-    h += '<div class="tot"><span>Total</span><span>' + rs(total) + '</span></div><p class="note" style="margin:2px 0 10px">Prices include tax. No extra charges at checkout.</p>';
-    if (soon.length) h += '<p class="note"><b>Reasoning Samjho:</b> checkout on this site opens soon. You can buy it right now on Gumroad.</p><div class="row2"><a class="btn ghost" href="' + gum() + '" target="_blank" rel="noopener">Buy on Gumroad · ' + rs(cat.reasoning.price) + "</a></div>";
+    const onSite = dodoKeys.reduce((a, k) => a + cat[k].price, 0), onGum = soon.reduce((a, k) => a + cat[k].price, 0);
+    if (dodoKeys.length && !soon.length) h += '<div class="tot"><span>Total</span><span>' + rs(onSite) + '</span></div><p class="note" style="margin:2px 0 10px">Prices include tax. No extra charges at checkout.</p>';
+    else if (dodoKeys.length) h += '<div class="tot"><span>Pay on this site</span><span>' + rs(onSite) + '</span></div><p class="note" style="margin:2px 0 6px">Tax included. This is what Checkout charges.</p><div class="tot" style="font-size:16px"><span>Reasoning Samjho on Gumroad</span><span>' + rs(onGum) + '</span></div><p class="note" style="margin:2px 0 10px">Paid separately on Gumroad, at the price shown there.</p>';
+    else h += '<div class="tot"><span>Reasoning Samjho on Gumroad</span><span>' + rs(onGum) + '</span></div><p class="note" style="margin:2px 0 10px">Card checkout on this site opens soon. Buy it now on Gumroad, at the price shown there.</p>';
+    if (soon.length) h += '<div class="row2"><a class="btn ghost" href="' + gum() + '" target="_blank" rel="noopener">Buy on Gumroad \u00B7 ' + rs(cat.reasoning.price) + "</a></div>";
     if (dodoKeys.length) h += '<div class="row2" style="margin-top:12px"><button class="btn" type="button" id="ctpay">' + (tok() ? "Checkout" : "Log in to checkout") + "</button></div>";
     h += '<div class="err" id="cterr" role="alert">' + eh(note || "") + "</div>";
   }
