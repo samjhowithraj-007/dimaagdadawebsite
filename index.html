@@ -678,7 +678,7 @@ const rs = (n) => "₹" + n;
 const gum = () => { const b = BOOKP.buy.en; return BOOKP.launchOn ? b.replace(/\/$/, "") + "/" + BOOKP.launchCode : b; };
 const CAT = () => ({
   reasoning: { name: "Reasoning Samjho: Puzzle se Selection tak", sub: "English, PDF + EPUB", price: BOOKP.launchOn ? BOOKP.launch : BOOKP.price, dodo: false },
-  pack: { name: "Club scene pack", sub: "5 jigsaws, digital", price: 49, dodo: true }
+  pack: { name: "Club scene pack", sub: "5 jigsaws, digital", price: 59, dodo: true }
 });
 const baseCart = () => L.get("cart", []).filter((k) => k === "pack"), xCart = () => L.get("cartx", []).filter((k) => k === "reasoning");
 const cartKeys = () => baseCart().concat(xCart());
