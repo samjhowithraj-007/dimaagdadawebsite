@@ -157,7 +157,7 @@ const app = document.getElementById("app");
 const $ = id => document.getElementById(id);
 const store = { get(k, d) { try { const v = localStorage.getItem("dp-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem("dp-" + k, JSON.stringify(v)); } catch (e) {} } };
-let stars = store.get("stars", {}), best = store.get("best", {}), sound = store.get("sound", true), G = null, yearly = false, cart = store.get("cart", []).filter(k => k !== "comic"), shopCat = "All";   // the comic is free, never in the cart
+let stars = store.get("stars", {}), best = store.get("best", {}), sound = store.get("sound", true), G = null, yearly = false, cart = store.get("cart", []).filter(k => k !== "comic" && PRODUCTS.some(p => p.k === k)), shopCat = "All";   // the comic is free, never in the cart
 const ent = () => store.get("ent", { club: false, own: [] });   // set only by the server (/me) for the signed-in account
 const club = () => !!ent().club;
 function guessCur(){ let c = "INR"; try { const r = ((navigator.language || "").split("-")[1] || "").toUpperCase();
@@ -452,6 +452,8 @@ const sb = $("snd"); sb.textContent = sound ? "🔊" : "🔇";
 sb.onclick = () => { sound = !sound; store.set("sound", sound); sb.textContent = sound ? "🔊" : "🔇"; };
 let rz = 0; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if (G && G.BW !== avail()) layout(); }, 200); });
 addEventListener("hashchange", render); render(); checkReturn(); sync();
+// the site header (Log in / cart) writes the same dp-* keys in the parent page: follow it
+addEventListener("storage", e => { if (e.key && !/^dp-(tok|email|ent|cart)$/.test(e.key)) return; cart = store.get("cart", []).filter(k => k !== "comic" && PRODUCTS.some(p => p.k === k)); if (!G) render(); });
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 </script>
 </body>

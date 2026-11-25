@@ -171,6 +171,29 @@ footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);backg
   .brand small{display:none}
 }
 @media (max-width:420px){ .brand b{font-size:18px} .bar .row{gap:6px} }
+
+.acct{display:inline-flex;align-items:center;gap:6px;font:700 13px var(--body);border:1px solid rgba(255,244,213,.5);border-radius:99px;padding:0 12px;height:38px;background:var(--yellow);color:#3c1f5c;cursor:pointer;white-space:nowrap;max-width:190px}
+.acct span.t{overflow:hidden;text-overflow:ellipsis}
+.cartbtn{position:relative}.cartbtn svg,.acct svg{width:18px;height:18px;flex:none}
+.cartn{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;border-radius:99px;background:#e0334c;color:#fff;font:800 11px/19px var(--body);text-align:center;padding:0 4px}.cartn[hidden]{display:none}
+@media (max-width:480px){.install-x,.install-w{display:none}.install{padding:3px}.install img{width:30px;height:30px}.brand b{font-size:16px}.bar .row{gap:6px;padding:8px 10px}.ib{width:36px;height:36px}.acct{height:36px;padding:0 10px}}
+dialog.dd{border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);padding:0;max-width:min(440px,calc(100vw - 24px));width:100%;font-size:15.5px;box-shadow:var(--shadow)}
+dialog.dd::backdrop{background:rgba(0,0,0,.55)}
+dialog.dd .in{padding:20px}
+dialog.dd h3{margin:0 0 6px;font:800 21px var(--disp)}
+dialog.dd .x{position:absolute;top:10px;right:12px;border:0;background:transparent;color:var(--ink);font-size:26px;line-height:1;cursor:pointer}
+dialog.dd input{width:100%;font:inherit;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);margin:8px 0}
+dialog.dd .row2{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+dialog.dd .err{color:#d6334b;font-weight:700;min-height:1.3em;margin-top:6px}
+dialog.dd .note{opacity:.8;font-size:13.5px}
+dialog.dd .line{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);align-items:center}
+dialog.dd .line small{display:block;opacity:.75}
+dialog.dd .tot{display:flex;justify-content:space-between;font-weight:800;font-size:18px;padding:10px 0 2px}
+dialog#cartdlg{margin:0 0 0 auto;height:100dvh;max-height:100dvh;border-radius:18px 0 0 18px;max-width:min(420px,100vw)}
+@media (max-width:600px){dialog#cartdlg{margin:auto 0 0;width:100vw;max-width:100vw;height:fit-content;max-height:88dvh;border-radius:20px 20px 0 0}}
+dialog#cartdlg .in{overflow-y:auto;overflow-x:hidden;max-height:inherit}
+dialog.dd .line>div:first-child{min-width:0;overflow-wrap:anywhere}
+dialog.dd .line>div:last-child{white-space:nowrap;flex:none}
 </style>
 </head>
 <body>
@@ -179,7 +202,9 @@ footer .soc a{width:38px;height:38px;border:1px solid rgba(255,244,213,.4);backg
   <div class="row">
     <a class="brand" href="#home" aria-label="Dimaag Dada home"><img src="img/icon-192.png" alt="" width="38" height="38"><span><b>Dimaag Dada</b><small>Think first, then speak</small></span></a>
     <span class="sp"></span>
-    <button class="install" id="install" type="button"><img src="img/icon-192.png" alt="" width="28" height="28">Install<span class="install-x"> app</span></button>
+    <button class="install" id="install" type="button" aria-label="Install the app"><img src="img/icon-192.png" alt="" width="28" height="28"><span class="install-w">Install</span><span class="install-x"> app</span></button>
+    <button class="acct" id="acct" type="button" aria-label="Log in or register"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg><span class="t" id="acctt">Log in</span></button>
+    <button class="ib cartbtn" id="cartbtn" type="button" aria-label="Cart, empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2.5 3.5H5l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><span class="cartn" id="cartn" hidden>0</span></button>
     <button class="ib" id="theme" type="button" aria-label="Switch light or dark theme" title="Light / dark">☾</button>
   </div>
   <nav class="tabs" id="tabs" aria-label="Main"></nav>
@@ -422,8 +447,8 @@ function bookStore(){
       <ul class="ticks"><li>192 original reasoning puzzles, from easy to hard</li><li>Good practice for school quizzes, interviews and competitive exams</li><li>3 mock tests; every answer checked</li><li>English edition, PDF + EPUB</li></ul>
       <p class="note">by <b>Raj</b></p>
       <div class="pricebox"><img class="mascot" src="img/dada-3d.webp" alt="Dimaag Dada giving a thumbs up" width="96" height="166"><div class="price">${pr}</div>
-        <div class="buyrow">${pzBuy("en", "Buy the book", now)}</div>
-        <p class="note" style="margin:8px 0 0">Instant PDF + EPUB download after payment. Checkout is on Gumroad.</p></div></div></section>
+        <div class="buyrow">${pzBuy("en", "Buy on Gumroad", now)}<button class="btn ghost" type="button" data-addcart="reasoning">Add to cart</button></div>
+        <p class="note" style="margin:8px 0 0">Instant PDF + EPUB download after payment. Buy now on Gumroad, or add it to your cart: card checkout on this site opens soon.</p></div></div></section>
   <section class="sec"><p class="eyebrow">Free preview</p><h2>Chapter 1: Seating Arrangement</h2>
     <p class="lead">The chapter's title page, Dada's class story and a peek at what's inside. Every competitive exam paper has a seating set.</p>
     <div class="pgrid"><div class="pcard"><b>Chapter 1</b><span>Seating Arrangement</span><div><a href="notes/puzzles-1-en-preview.pdf" target="_blank" rel="noopener">Read the free chapter (PDF)</a></div></div></div></section>`;
@@ -636,6 +661,99 @@ installBtn.addEventListener("click", async () => {
   help.querySelector(".ih-body").innerHTML = installSteps(); help.showModal();
 });
 help.addEventListener("click", e => { if (e.target === help || e.target.closest("[data-close]")) help.close(); });
+</script>
+<dialog class="dd" id="logindlg" aria-labelledby="lg-t"><div class="in" id="loginbody"></div></dialog>
+<dialog class="dd" id="cartdlg" aria-labelledby="ct-t"><div class="in" id="cartbody"></div></dialog>
+<script>
+// ---- Account and cart (header Log in / Register + cart). Same storage keys as the Play/Shop app (dp-*), so both stay in step. ----
+(function(){
+const PAY = "https://dada-pay.techsamjhoraj.workers.dev", $ = (i) => document.getElementById(i);
+const L = { get(k, d){ try { const v = localStorage.getItem("dp-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v){ try { localStorage.setItem("dp-" + k, JSON.stringify(v)); } catch (e) {} } };
+const eh = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+async function api(path, body){ const r = await fetch(PAY + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || "Something went wrong. Please try again."); return j; }
+const tok = () => L.get("tok", null), mail = () => L.get("email", null);
+const setEnt = (e) => L.set("ent", { club: !!(e && e.club), own: (e && e.own) || [] });
+const signOutLocal = () => { L.set("tok", null); L.set("email", null); setEnt(null); };
+const rs = (n) => "₹" + n;
+const gum = () => { const b = BOOKP.buy.en; return BOOKP.launchOn ? b.replace(/\/$/, "") + "/" + BOOKP.launchCode : b; };
+const CAT = () => ({
+  reasoning: { name: "Reasoning Samjho: Puzzle se Selection tak", sub: "English, PDF + EPUB", price: BOOKP.launchOn ? BOOKP.launch : BOOKP.price, dodo: false },
+  pack: { name: "Club scene pack", sub: "5 jigsaws, digital", price: 49, dodo: true }
+});
+const baseCart = () => L.get("cart", []).filter((k) => k === "pack"), xCart = () => L.get("cartx", []).filter((k) => k === "reasoning");
+const cartKeys = () => baseCart().concat(xCart());
+function addItem(k){ if (cartKeys().includes(k)) return; if (k === "reasoning") L.set("cartx", xCart().concat(k)); else L.set("cart", baseCart().concat(k)); }
+function dropItem(k){ if (k === "reasoning") L.set("cartx", xCart().filter((x) => x !== k)); else L.set("cart", L.get("cart", []).filter((x) => x !== k)); }
+
+function hdr(){
+  const n = cartKeys().length, c = $("cartn"); c.textContent = n; c.hidden = !n; $("cartbtn").setAttribute("aria-label", n ? "Cart, " + n + (n === 1 ? " item" : " items") : "Cart, empty");
+  const m = mail(); $("acctt").textContent = tok() && m ? m.split("@")[0].slice(0, 12) : "Log in";
+  $("acct").setAttribute("aria-label", tok() ? "Account: " + (m || "") : "Log in or register with your email");
+}
+
+// ---- log in / register ----
+function openLogin(then){
+  const d = $("logindlg"), b = $("loginbody"); let after = then;
+  const frame = (inner) => { b.innerHTML = '<button class="x" type="button" id="lgx" aria-label="Close">×</button>' + inner; $("lgx").onclick = () => d.close(); };
+  const signedIn = () => { const e = L.get("ent", { club: false, own: [] }); const has = [e.club ? "Dada Club" : "", (e.own || []).includes("pack") ? "Club scene pack" : "", (e.own || []).includes("book") ? "Puzzle Book" : ""].filter(Boolean);
+    frame('<h3 id="lg-t">Your account</h3><p>Signed in as <b>' + eh(mail() || "") + '</b></p><p>' + (has.length ? "You own: <b>" + eh(has.join(", ")) + "</b>." : "Nothing bought yet. Purchases will appear here.") + '</p><div class="row2"><button class="btn ghost" type="button" id="lgout">Log out</button><button class="btn" type="button" id="lgok">Done</button></div>');
+    $("lgout").onclick = () => { const t = tok(); signOutLocal(); if (t) api("/auth/logout", { token: t }).catch(() => {}); hdr(); d.close(); }; $("lgok").onclick = () => d.close(); };
+  const ask = (msg) => { frame('<h3 id="lg-t">Register or log in with your email</h3><p>Enter your email and we will send you a 6-digit code. No password needed. New here? The code creates your account.</p><input id="lgem" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-label="Email"><div class="row2"><button class="btn" type="button" id="lgsend">Send code</button></div><div class="err" id="lgerr" role="alert">' + (msg || "") + "</div>");
+    $("lgsend").onclick = async () => { const em = $("lgem").value.trim().toLowerCase(); if (!em) { $("lgerr").textContent = "Enter your email first."; return; }
+      $("lgsend").disabled = true; try { await api("/auth/start", { email: em }); code(em); } catch (e) { $("lgerr").textContent = e.message; $("lgsend").disabled = false; } };
+    setTimeout(() => $("lgem") && $("lgem").focus(), 50); };
+  const code = (em) => { frame('<h3 id="lg-t">Enter your code</h3><p>We sent a 6-digit code to <b>' + eh(em) + '</b>. It works for 10 minutes. Check spam too.</p><input id="lgcd" inputmode="numeric" maxlength="6" autocomplete="one-time-code" aria-label="6-digit code" style="max-width:10em"><div class="row2"><button class="btn" type="button" id="lgv">Log in</button><button class="btn ghost" type="button" id="lgb">Different email</button></div><div class="err" id="lgerr" role="alert"></div>');
+    $("lgb").onclick = () => ask(""); setTimeout(() => $("lgcd") && $("lgcd").focus(), 50);
+    $("lgv").onclick = async () => { $("lgv").disabled = true; try { const v = await api("/auth/verify", { email: em, code: $("lgcd").value.trim() }); L.set("tok", v.token); L.set("email", v.email); setEnt(v); hdr(); d.close(); if (after) { const f = after; after = null; f(); } }
+      catch (e) { $("lgerr").textContent = e.message; $("lgv").disabled = false; } }; };
+  if (tok() && !then) signedIn(); else ask("");
+  if (!d.open) d.showModal();
+}
+
+// ---- cart drawer ----
+function openCart(note){
+  const d = $("cartdlg"), b = $("cartbody"), cat = CAT(), keys = cartKeys();
+  const total = keys.reduce((a, k) => a + cat[k].price, 0), dodoKeys = keys.filter((k) => cat[k].dodo), soon = keys.filter((k) => !cat[k].dodo);
+  let h = '<button class="x" type="button" id="ctx" aria-label="Close cart">×</button><h3 id="ct-t">Your cart</h3>';
+  if (!keys.length) h += '<p>Your cart is empty.</p><div class="row2"><a class="btn" href="#books" id="ctgo">See the book</a><a class="btn ghost" href="#shop" id="ctgo2">Open the shop</a></div>';
+  else {
+    h += keys.map((k) => '<div class="line"><div><b>' + eh(cat[k].name) + "</b><small>" + eh(cat[k].sub) + (cat[k].dodo ? "" : " · card checkout opens soon") + '</small></div><div><b>' + rs(cat[k].price) + '</b> <button class="ib" style="color:var(--ink);border-color:var(--line);width:30px;height:30px;font-size:15px" type="button" data-drop="' + k + '" aria-label="Remove ' + eh(cat[k].name) + '">×</button></div></div>').join("");
+    h += '<div class="tot"><span>Total</span><span>' + rs(total) + '</span></div><p class="note" style="margin:2px 0 10px">Prices include tax. No extra charges at checkout.</p>';
+    if (soon.length) h += '<p class="note"><b>Reasoning Samjho:</b> checkout on this site opens soon. You can buy it right now on Gumroad.</p><div class="row2"><a class="btn ghost" href="' + gum() + '" target="_blank" rel="noopener">Buy on Gumroad · ' + rs(cat.reasoning.price) + "</a></div>";
+    if (dodoKeys.length) h += '<div class="row2" style="margin-top:12px"><button class="btn" type="button" id="ctpay">' + (tok() ? "Checkout" : "Log in to checkout") + "</button></div>";
+    h += '<div class="err" id="cterr" role="alert">' + eh(note || "") + "</div>";
+  }
+  b.innerHTML = h; if (!d.open) d.showModal();
+  $("ctx").onclick = () => d.close();
+  b.querySelectorAll("[data-drop]").forEach((x) => x.onclick = () => { dropItem(x.dataset.drop); hdr(); openCart(); });
+  ["ctgo", "ctgo2"].forEach((i) => $(i) && ($(i).onclick = () => d.close()));
+  if ($("ctpay")) $("ctpay").onclick = () => checkout();
+}
+function gate(go){
+  const a = 2 + Math.floor(Math.random() * 8), c = 3 + Math.floor(Math.random() * 7), b = $("cartbody");
+  b.innerHTML = '<button class="x" type="button" id="ctx" aria-label="Close">×</button><h3 id="ct-t">Grown-ups only</h3><p>What is ' + a + " × " + c + '?</p><input id="gin" inputmode="numeric" autocomplete="off" aria-label="Answer" style="max-width:8em"><div class="row2"><button class="btn" type="button" id="ggo">Continue</button><button class="btn ghost" type="button" id="gback">Back to cart</button></div><div class="err" id="gerr" role="alert"></div>';
+  $("ctx").onclick = () => $("cartdlg").close(); $("gback").onclick = () => openCart();
+  $("ggo").onclick = () => { const v = $("gin").value.trim(); if (!v) { $("gerr").textContent = "Enter the answer first."; return; } if (+v !== a * c) { $("gerr").textContent = "Not quite. Ask a grown-up to help."; return; } go(); };
+}
+async function checkout(){
+  const cat = CAT(), items = cartKeys().filter((k) => cat[k].dodo);
+  if (!items.length) { openCart("Card checkout for the book opens soon. Buy it on Gumroad now."); return; }
+  if (!tok()) { $("cartdlg").close(); openLogin(() => openCart()); return; }
+  gate(async () => {
+    $("cartbody").innerHTML = '<h3 id="ct-t">Opening secure checkout…</h3><p>One moment. You will go to our payment partner, Dodo Payments, and come back here after paying.</p>';
+    try { const o = await api("/order", { items, token: tok() }); location.href = o.checkout_url; }
+    catch (e) { if (/sign in/i.test(e.message || "")) { signOutLocal(); hdr(); $("cartdlg").close(); openLogin(() => openCart()); } else openCart(e.message + " Nothing was charged."); }
+  });
+}
+
+$("acct").addEventListener("click", () => openLogin());
+$("cartbtn").addEventListener("click", () => openCart());
+document.addEventListener("click", (e) => { const a = e.target.closest && e.target.closest("[data-addcart]"); if (!a) return; addItem(a.dataset.addcart); hdr(); openCart(); });
+addEventListener("storage", (e) => { if (e.key && !/^dp-(tok|email|ent|cart|cartx)$/.test(e.key)) return; hdr(); if ($("cartdlg").open) openCart(); });
+addEventListener("hashchange", () => { $("cartdlg").close(); });
+hdr();
+if (tok()) api("/me", { token: tok() }).then((m) => { L.set("email", m.email); setEnt(m); hdr(); }).catch((e) => { if (/signed out/i.test(e.message || "")) { signOutLocal(); hdr(); } });
+})();
 </script>
 </body>
 </html>
