@@ -82,7 +82,7 @@
 .bk-sticky b{display:block;font:800 16px var(--disp)}.bk-sticky small{color:var(--muted)}
 body.bk-sticky-on .bk-sticky{display:block}
 body.bk-sticky-on main{padding-bottom:96px}
-body.bk-sticky-on .cb-fab{bottom:calc(88px + env(safe-area-inset-bottom))}
+body.bk-sticky-on .cb-fab{bottom:calc(100px + env(safe-area-inset-bottom))}
 @media (max-width:860px){
   .bk-hero,.bk-prod{grid-template-columns:minmax(0,1fr)}
   .bk-hero{padding:18px}.bk-collage{min-height:240px}
