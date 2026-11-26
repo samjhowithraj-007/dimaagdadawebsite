@@ -166,7 +166,7 @@ function guessCur(){ let c = "INR"; try { const r = ((navigator.language || "").
 let cur = "INR";   // live launch: INR only. Other currencies stay hidden until Dodo has matching prices for them
 const val = k => PRICE[k][cur];
 const money = v => SYM[cur] + (cur === "INR" ? Math.round(v) : v.toFixed(2));
-const fmtP = k => val(k) == null ? "India only" : money(val(k));
+const fmtP = k => val(k) == null ? "India only" : money(val(k)) + " + tax";
 function dayKey(d){ d = d || new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
 function weekly(){ const c = SCENES.filter(s => !s.free); if (!c.length) return null; const w = Math.max(0, Math.floor((Date.now() - WEEK0) / 6048e5)); return c[w % c.length]; }
 function daily(){ const d = new Date(); return SCENES[Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) % SCENES.length]; }
@@ -207,7 +207,7 @@ function readTab(){
 }
 function tierCard(n, k, list, best){
   const v = val(k) * (yearly ? 10 : 1);
-  return `<div class="tier${best ? " best" : ""}"><div class="top2"><h3>${n}</h3>${best ? '<span class="ribbon">MOST POPULAR</span>' : ""}</div><div class="big">${money(v)} <small>/ ${yearly ? "year" : "month"}</small></div><ul>${list.map(x => `<li>${x}</li>`).join("")}</ul>
+  return `<div class="tier${best ? " best" : ""}"><div class="top2"><h3>${n}</h3>${best ? '<span class="ribbon">MOST POPULAR</span>' : ""}</div><div class="big">${money(v)} <small>+ tax / ${yearly ? "year" : "month"}</small></div><ul>${list.map(x => `<li>${x}</li>`).join("")}</ul>
   <button class="cta" type="button" data-pay="${(Math.round(v * 100))}" data-items="${k}:${yearly ? "y" : "m"}" data-what="${n} · ${yearly ? "yearly" : "monthly"}">Join ${n}</button></div>`;
 }
 function clubTab(){
@@ -231,7 +231,7 @@ function shopTab(){
   <div class="chips" role="group" aria-label="Category">${cats.map(c => `<button class="chip" type="button" data-cat="${c}" aria-pressed="${c === shopCat}">${c}</button>`).join("")}</div>
   <div class="prods">${list.length ? list.map(p => `<div class="prod"><div class="thumb"><img src="${p.imgS || p.img}" alt="" loading="lazy" width="480" height="360" style="aspect-ratio:${p.k === "comic" ? "3/4" : "4/3"}">${p.badge ? BADGE[p.badge === "new" ? "neu" : p.badge] : ""}</div><b>${p.t}</b><small>${p.s}</small>
     <div class="row">${p.soon ? `<span class="price">Soon</span><a class="cta" style="padding:7px 12px;font-size:13px" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Notify me</a>` : p.free ? `<span class="price">Free</span><a class="cta" style="padding:7px 12px;font-size:13px" href="${p.free}">Read now</a>` : `<span class="price">${fmtP(p.k)}${p.was && val(p.k) != null ? `<span class="was">${money(val(p.k) * 1.3)}</span>` : ""}</span>${(p.k === "pack" && packOwned()) ? '<span class="price" style="color:var(--ok)">✓ Owned</span><a class="cta" style="padding:7px 12px;font-size:13px" href="../#scenes" target="_top">Play scenes</a>' : val(p.k) == null ? '<small>Coming abroad</small>' : `<button class="add" type="button" data-add="${p.k}" aria-pressed="${inCart(p.k)}" aria-label="${inCart(p.k) ? "Remove" : "Add"} ${p.t}">${inCart(p.k) ? "✓" : "+"}</button>`}`}</div></div>`).join("") : '<p class="note">Board games are coming soon.</p>'}</div>
-  ${items.length ? `<div class="cartbar"><span>${items.length} item${items.length > 1 ? "s" : ""} · ${money(total)}</span><button type="button" data-pay="${Math.round(total * 100)}" data-items="${items.join(",")}" data-what="${items.map(k => PRODUCTS.find(p => p.k === k).t).join(" + ")}">Checkout</button></div>` : ""}${testNote()}`;
+  ${items.length ? `<div class="cartbar"><span>${items.length} item${items.length > 1 ? "s" : ""} · ${money(total)} + tax</span><button type="button" data-pay="${Math.round(total * 100)}" data-items="${items.join(",")}" data-what="${items.map(k => PRODUCTS.find(p => p.k === k).t).join(" + ")}">Checkout</button></div>` : ""}${testNote()}`;
 }
 function testNote(){ return CONFIG.SAMPLE_PRICES ? `<p class="note">Test mode: prices are samples and no real money is taken yet.</p>` : ""; }
 function footer(){ return `<p class="foot"><a href="terms.html">Terms</a> · <a href="refund.html">Refunds</a> · <a href="shipping.html">Shipping</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a><br>Part of <a href="../">dimaagdada.com</a> · Made by Raj · <a href="https://www.youtube.com/@DimaagDada" target="_blank" rel="noopener">Dimaag Dada on YouTube</a> · No ads, no tracking</p>`; }
@@ -243,7 +243,7 @@ function sheet(html){ const s = $("sheet"); s.innerHTML = html; s.hidden = false
 const head = (what, amount) => `<div class="head"><img src="img/dada3d-96.webp" alt="" width="36" height="36"><div><h3>Dimaag Dada</h3><small style="color:#6b7686;font-size:12px">${esc(what)}</small></div><span class="amt">${amount}</span><button class="x" type="button" id="sx" aria-label="Close">×</button></div>`;
 function parentGate(what, minor){
   const a = 2 + Math.floor(Math.random() * 8), b = 3 + Math.floor(Math.random() * 7);
-  sheet(`<div class="pay" role="dialog" aria-label="Grown-ups only">${head(what, money(minor / 100))}<p><b>Grown-ups only.</b> What is ${a} × ${b}?</p><div><input id="gatein" inputmode="numeric" autocomplete="off" aria-label="Answer"> <button class="go" style="display:inline-block;padding:10px 18px" type="button" id="gatego">Continue</button></div><div class="err" id="gateerr"></div></div>`);
+  sheet(`<div class="pay" role="dialog" aria-label="Grown-ups only">${head(what, money(minor / 100) + " + tax")}<p><b>Grown-ups only.</b> What is ${a} × ${b}?</p><div><input id="gatein" inputmode="numeric" autocomplete="off" aria-label="Answer"> <button class="go" style="display:inline-block;padding:10px 18px" type="button" id="gatego">Continue</button></div><div class="err" id="gateerr"></div></div>`);
   $("gatego").onclick = () => { const v = $("gatein").value.trim();
     if (!v) { $("gateerr").textContent = "Enter the answer first."; return; }
     if (+v !== a * b) { $("gateerr").textContent = "Not quite. Ask a grown-up to help."; return; }
@@ -253,14 +253,14 @@ let payItems = [];
 async function api(path, body){ const r = await fetch(CONFIG.PAY_API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || "server error"); return j; }
 function payMsg(what, amt, title, html){ sheet(`<div class="pay" role="dialog">${head(title, amt)}${html}<button class="go" type="button" id="sx2">Back to Dimaag Dada</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; }
 async function startPay(what, minor){
-  if (!CONFIG.PAY_API) { sheet(`<div class="pay" role="dialog">${head(what, money(minor / 100))}<p class="tm">TEST MODE · NOT CONNECTED</p><p><b>Payments open soon.</b> Dimaag Dada is still being built, and no money is taken yet. Join the WhatsApp channel to hear when it opens.</p><a class="go" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Tell me when it opens (WhatsApp)</a><button class="go alt" type="button" id="sx2">Close</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; return; }
+  if (!CONFIG.PAY_API) { sheet(`<div class="pay" role="dialog">${head(what, money(minor / 100) + " + tax")}<p class="tm">TEST MODE · NOT CONNECTED</p><p><b>Payments open soon.</b> Dimaag Dada is still being built, and no money is taken yet. Join the WhatsApp channel to hear when it opens.</p><a class="go" href="${CONFIG.WHATSAPP}" target="_blank" rel="noopener">Tell me when it opens (WhatsApp)</a><button class="go alt" type="button" id="sx2">Close</button></div>`); $("sx2").onclick = () => $("sheet").hidden = true; return; }
   const items = payItems.slice();
-  payMsg(what, money(minor / 100), "Opening secure checkout…", "<p>One moment. You will go to our payment partner, Dodo Payments, and come back here after paying.</p>");
+  payMsg(what, money(minor / 100) + " + tax", "Opening secure checkout…", "<p>One moment. You will go to our payment partner, Dodo Payments, and come back here after paying.</p>");
   try {
     const o = await api("/order", { items, cur, token: tok() });   // the server picks the products and prices, not this page
     store.set("pendingOrder", { id: o.order_id, items, what, at: Date.now() });
     (window.top || window).location.href = o.checkout_url;   // the app can sit inside an iframe on the Shop/Community pages; the Dodo page must open full window
-  } catch (e) { if (/sign in/i.test(e.message || "")) { signOutLocal(); signIn(() => parentGate(what, minor)); return; } payMsg(what, money(minor / 100), "Checkout did not open", `<p>${esc(e.message || "Check your internet and try again.")}</p><p class="note">Nothing was charged.</p>`); }
+  } catch (e) { if (/sign in/i.test(e.message || "")) { signOutLocal(); signIn(() => parentGate(what, minor)); return; } payMsg(what, money(minor / 100) + " + tax", "Checkout did not open", `<p>${esc(e.message || "Check your internet and try again.")}</p><p class="note">Nothing was charged.</p>`); }
 }
 // Coming back from checkout: /play/?order=<id>. We never trust the address bar; we ask our server, which learns "paid" from Dodo's signed webhook.
 // On every app open: re-ask the server about our paid orders. A cancelled, expired or refunded order removes its access.

@@ -1,5 +1,5 @@
 // Offline support for Dimaag Dada. Bump VERSION on any change to this file, index.html or the precache list.
-const VERSION = "v24";
+const VERSION = "v25";
 const CACHE = "dimaagdada-" + VERSION;
 const PRECACHE = ["./", "index.html", "books.css?v=2", "books.js?v=2", "manifest.webmanifest", "img/icon-192.png", "img/icon-512.png", "img/apple-touch-icon.png", "img/hero.webp", "img/mark.webp"];
 
