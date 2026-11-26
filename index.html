@@ -195,6 +195,7 @@ dialog#cartdlg .in{overflow-y:auto;overflow-x:hidden;max-height:inherit}
 dialog.dd .line>div:first-child{min-width:0;overflow-wrap:anywhere}
 dialog.dd .line>div:last-child{white-space:nowrap;flex:none}
 </style>
+<link rel="stylesheet" href="books.css?v=1">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -223,6 +224,7 @@ dialog.dd .line>div:last-child{white-space:nowrap;flex:none}
 </footer>
 <dialog class="install-help" id="install-help" aria-labelledby="ih-title"><h3 id="ih-title">Install the app</h3><div class="ih-body"></div><button class="btn" type="button" data-close>Got it</button></dialog>
 
+<script src="books.js?v=1"></script>
 <script>
 const ICONS = {
   youtube:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg>',
@@ -355,8 +357,8 @@ const VIEWS = {
     <div class="card sec bkcard"><img src="play/img/comics-trail.webp" alt="" width="120" height="160" loading="lazy"><div><h3>Read Dada's comics</h3><p>Prefer reading? The Puzzle Trail is a free comic where you solve the clues with Anna and Chiklu.</p><a class="btn" href="#comics">Read the comic</a></div></div>
     <div class="card sec"><h3>Meet the cast</h3><p><b>Dimaag Dada</b> is the wise grandfather in India. <b>Anna</b> (9) and <b>Chiklu</b> (7) live in the Netherlands and visit him in the holidays. All three wear round black glasses, so they can see every clue.</p><img src="img/hero.webp" alt="Dimaag Dada, Anna and Chiklu" width="1005" height="698" loading="lazy" style="max-width:420px;width:100%"></div>`,
 
-  books: () => `<h1>Books</h1>${bookStore()}
-    <div class="card sec bkcard"><img src="play/img/comic/trail-1-cover.webp" alt="Anna and Chiklu with a treasure map" width="160" height="160" loading="lazy" style="object-fit:cover"><div><h3>Anna &amp; Chiklu's Puzzle Book</h3><p>Mazes, number puzzles and spot-the-difference for kids 7 to 12. Coming soon: follow the channels to hear first.</p><a class="btn ghost" href="#community">Follow Dada</a></div></div>${signup("Tell me when a new book arrives")}`,
+  books: () => DDBOOK.store() + signup("Tell me when a new book arrives"),
+  book: (slug) => DDBOOK.product(slug),
 
   jigsaw: () => jigsawPage(),
 
@@ -386,12 +388,14 @@ const NAV = [["home","Home"],["daily","Daily puzzle"],["archive","Archive"],["pl
 
 const app = document.getElementById("app");
 function render(){
-  let r = (location.hash || "#home").slice(1).split("?")[0];
+  let r = (location.hash || "#home").slice(1).split("?")[0], slug = null;
   if (r === "channels" || r === "club") r = "community";
+  if (r.indexOf("book/") === 0) { slug = r.slice(5); r = "book"; }
   if (!VIEWS[r]) r = "home";
-  app.innerHTML = VIEWS[r]();
-  document.title = TITLES[r];
-  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r))) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
+  app.innerHTML = VIEWS[r](slug);
+  document.title = r === "book" ? "Reasoning Samjho \u00B7 Books \u00B7 Dimaag Dada" : TITLES[r];
+  document.body.classList.toggle("bk-sticky-on", r === "book" && !!document.querySelector(".bk-sticky"));
+  document.getElementById("tabs").innerHTML = NAV.map(([k, n]) => `<a href="#${k}"${(k === r || (k === "books" && r === "book") || (k === "play" && ["scenes","snakes","ludo","chess","comics","jigsaw"].includes(r))) ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   window.scrollTo(0, 0);
   document.getElementById("main").focus({ preventScroll: true });
   if (r === "jigsaw") setTimeout(() => startJigsaw());
@@ -714,16 +718,16 @@ function openLogin(then){
 function openCart(note){
   const d = $("cartdlg"), b = $("cartbody"), cat = CAT(), keys = cartKeys();
   const total = keys.reduce((a, k) => a + cat[k].price, 0), dodoKeys = keys.filter((k) => cat[k].dodo), soon = keys.filter((k) => !cat[k].dodo);
-  let h = '<button class="x" type="button" id="ctx" aria-label="Close cart">×</button><h3 id="ct-t">Your cart</h3>';
+  let h = '<button class="x" type="button" id="ctx" aria-label="Close cart">×</button><h3 id="ct-t">Cart <span class="bk-pill p" style="vertical-align:middle;margin-left:6px">' + keys.length + (keys.length === 1 ? ' item' : ' items') + '</span></h3>' + (keys.length ? '<p class="note" style="margin:0 0 6px;font-weight:700">Instant download after payment \u00B7 PDF and EPUB</p>' : '');
   if (!keys.length) h += '<p>Your cart is empty.</p><div class="row2"><a class="btn" href="#books" id="ctgo">See the book</a><a class="btn ghost" href="#shop" id="ctgo2">Open the shop</a></div>';
   else {
-    h += keys.map((k) => '<div class="line"><div><b>' + eh(cat[k].name) + "</b><small>" + eh(cat[k].sub) + (cat[k].dodo ? "" : " · card checkout opens soon") + '</small></div><div><b>' + rs(cat[k].price) + '</b> <button class="ib" style="color:var(--ink);border-color:var(--line);width:30px;height:30px;font-size:15px" type="button" data-drop="' + k + '" aria-label="Remove ' + eh(cat[k].name) + '">×</button></div></div>').join("");
+    h += keys.map((k) => '<div class="line"><div style="display:flex;gap:10px;align-items:center;min-width:0"><img src="' + DDBOOK.thumb(k) + '" alt="" width="44" height="58" style="width:44px;height:58px;object-fit:cover;border-radius:6px;border:1px solid var(--line);flex:none"><span style="min-width:0"><b>' + eh(cat[k].name) + "</b><small>" + eh(cat[k].sub) + (cat[k].dodo ? "" : " · card checkout opens soon") + '</small></span></div><div><b>' + rs(cat[k].price) + '</b> <button class="ib" style="color:var(--ink);border-color:var(--line);width:30px;height:30px;font-size:15px" type="button" data-drop="' + k + '" aria-label="Remove ' + eh(cat[k].name) + '">×</button></div></div>').join("");
     const onSite = dodoKeys.reduce((a, k) => a + cat[k].price, 0), onGum = soon.reduce((a, k) => a + cat[k].price, 0);
     if (dodoKeys.length && !soon.length) h += '<div class="tot"><span>Total</span><span>' + rs(onSite) + '</span></div><p class="note" style="margin:2px 0 10px">Prices include tax. No extra charges at checkout.</p>';
     else if (dodoKeys.length) h += '<div class="tot"><span>Pay on this site</span><span>' + rs(onSite) + '</span></div><p class="note" style="margin:2px 0 6px">Tax included. This is what Checkout charges.</p><div class="tot" style="font-size:16px"><span>Reasoning Samjho on Gumroad</span><span>' + rs(onGum) + '</span></div><p class="note" style="margin:2px 0 10px">Paid separately on Gumroad, at the price shown there.</p>';
     else h += '<div class="tot"><span>Reasoning Samjho on Gumroad</span><span>' + rs(onGum) + '</span></div><p class="note" style="margin:2px 0 10px">Card checkout on this site opens soon. Buy it now on Gumroad, at the price shown there.</p>';
     if (soon.length) h += '<div class="row2"><a class="btn ghost" href="' + gum() + '" target="_blank" rel="noopener">Buy on Gumroad \u00B7 ' + rs(cat.reasoning.price) + "</a></div>";
-    if (dodoKeys.length) h += '<div class="row2" style="margin-top:12px"><button class="btn" type="button" id="ctpay">' + (tok() ? "Checkout" : "Log in to checkout") + "</button></div>";
+    if (dodoKeys.length) h += '<div class="row2" style="margin-top:12px"><button class="btn" type="button" id="ctpay">' + (tok() ? "Checkout" : "Log in to checkout") + '</button></div><p class="note" style="margin:8px 0 0">Secure payment by Dodo Payments.</p>';
     h += '<div class="err" id="cterr" role="alert">' + eh(note || "") + "</div>";
   }
   b.innerHTML = h; if (!d.open) d.showModal();
