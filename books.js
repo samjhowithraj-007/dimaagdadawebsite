@@ -31,8 +31,8 @@ const href = (b) => "#book/" + b.slug;
 function priceHtml(b){
   if (b.status !== "sale") return '<span class="bk-pn">Price announced at launch</span>';
   const z = BOOKP;
-  return z.launchOn ? '<span class="bk-p">' + R(z.launch) + '</span><small class="bk-pt">Launch price until ' + eh(z.launchEndsLabel) + ", then " + R(z.price) + ". Tax included.</small>"
-                    : '<span class="bk-p">' + R(z.price) + '</span><small class="bk-pt">Tax included.</small>';
+  return z.launchOn ? '<span class="bk-p">' + R(z.launch) + '</span><small class="bk-pt">Launch price until ' + eh(z.launchEndsLabel) + ", then " + R(z.price) + ". Final amount shown at checkout.</small>"
+                    : '<span class="bk-p">' + R(z.price) + '</span><small class="bk-pt">Final amount shown at checkout.</small>';
 }
 const pills = (b) => '<div class="bk-pills">' + (b.pills || []).map((p) => '<span class="bk-pill ' + p[0] + '">' + eh(p[1]) + "</span>").join("") + "</div>";
 function buyBtns(b, sm){
@@ -88,7 +88,7 @@ function product(slug){
     + '<section class="bk-sec"><h2>Inside the book</h2><ol class="bk-toc">' + b.inside.map((c) => "<li><span>" + (c[0] ? "Chapter " + c[0] + " · " : "") + eh(c[1]) + "</span><span>p. " + c[2] + "</span></li>").join("") + "</ol></section>"
     + carousel(b) + faq(b)
     + (others.length ? '<section class="bk-sec"><h2>You may also like</h2><div class="bk-grid">' + others.map(card).join("") + "</div></section>" : "")
-    + '<div class="bk-sticky" aria-label="Add to cart"><div class="in"><div><b>' + eh(b.title) + "</b><small>" + (BOOKP.launchOn ? R(BOOKP.launch) + " launch price" : R(BOOKP.price)) + ' · tax included</small></div><button class="btn sm" type="button" data-addcart="' + b.id + '">Add to cart</button></div></div></div>';
+    + '<div class="bk-sticky" aria-label="Add to cart"><div class="in"><div><b>' + eh(b.title) + "</b><small>" + (BOOKP.launchOn ? R(BOOKP.launch) + " launch price" : R(BOOKP.price)) + ' · final amount at checkout</small></div><button class="btn sm" type="button" data-addcart="' + b.id + '">Add to cart</button></div></div></div>';
 }
 
 // ---- interactions (one delegated handler; works after every re-render)
